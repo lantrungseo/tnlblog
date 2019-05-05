@@ -1,0 +1,61 @@
+.auth-dialog--modal{
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.auth-dialog--close__icon{
+  position: fixed;
+  top : 5%;
+  right: 5%;
+  font-size: 2em;
+  font-weight: bold;
+  cursor : pointer;
+}
+.auth-dialog--close__icon:hover{
+  color : rgba(117, 119, 119, 1)
+}
+
+.auth-dialog--content{
+  width: 90%;
+  height: 40%;
+  position: fixed;
+  left: 5%;
+  top: 15%;
+  background-color: wheat;
+  text-align: center;
+  color: black;
+}
+.auth-dialog--content button{
+  display: block;
+  border: none;
+  font-size: 1.5em;
+  color: white;
+  margin: 10px auto;
+  padding: 10px;
+  width: 90%;
+  max-width: 300px;
+  cursor: pointer;
+}
+.auth-dialog--content button.fb{
+  background-color : #063594;
+}
+.auth-dialog--content button.reddit{
+  background-color : #ff4500;
+}
+.auth-dialog--content a{
+  color : black;
+}
+.auth-dialog--content a img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+
+

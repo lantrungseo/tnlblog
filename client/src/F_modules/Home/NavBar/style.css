@@ -1,0 +1,101 @@
+.navbar-container{
+  width: 100%;
+  height: 31px;
+  background-color :#063594;
+  color : #F7F7F7;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+/*mobile screen*/
+.navbar-container .mobile-nav{
+  display: block;
+  margin-left: 8px;
+  width: 100%;
+}
+
+.navbar-container .mobile-nav .mobile-nav__icon--open{
+  font-size: 1.2em;
+  float: right;
+  cursor: pointer;
+  padding: 5px 20px;
+}
+
+.navbar-container .mobile-nav .mobile-nav__content{ 
+  position: fixed;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background: rgb(57, 57, 59);
+}
+
+.navbar-container .mobile-nav .mobile-nav__content .search-container{
+  width: 80%;
+  max-width: 300px;
+  min-height: 50px;
+  margin: 20px auto;
+  padding: 20px auto;
+}
+
+.navbar-container .mobile-nav .mobile-nav__content h2{
+  padding: 5px 20px;
+}
+
+.navbar-container .mobile-nav .logo{
+  margin: 30px;
+}
+
+/*big screen*/
+.navbar-container .nav{
+  display: none;
+}
+
+
+@media only screen and (min-width: 750px){
+  .navbar-container .mobile-nav{
+    display: none;
+  }
+  .navbar-container .nav{
+    display: block;
+    height: 100%;
+    margin: 0 8%;
+  }
+  .navbar-container .nav .nav__link{
+    height: 100%;
+    width: 30%;
+    padding: 0 0;
+    margin: 0 0;
+  }
+  .navbar-container .nav .nav__link a{
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    color : white;
+    vertical-align: middle;
+  }
+  .navbar-container .nav .nav-content{
+    position : fixed;
+    top: 30px;
+    left: 0;
+    width:100%;
+    min-height: 150px;
+    background : white;
+  }
+  .navbar-container .nav .nav-content .logo{
+    color : black;
+    margin: 20px 10%;
+  }
+  .navbar-container .nav .search-container{
+    float: right;
+    max-width: 200px;
+    max-height: 27px;
+    width: 30%;
+    margin: -30px 30%;
+  }
+}
+
+
+

@@ -1,0 +1,24 @@
+.floating-menu--container{
+  position : fixed;
+  bottom: calc(8vh + 50px);
+  right: calc(8vw + 30px);
+  background: rgb(77, 75, 75);
+  width: 80%;
+  max-width: 200px;
+  text-align: center;
+  z-index: 1;
+}
+
+.floating-menu--container a{
+  text-decoration: none;
+  cursor: pointer;
+  padding: 10px auto;
+  width:100%;
+  display: block;
+  height: 40px;
+  color: white;
+}
+
+.floating-menu--container a:hover{
+  background: grey;
+}

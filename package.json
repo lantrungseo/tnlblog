@@ -1,0 +1,33 @@
+{
+  "name": "scammer-wiki",
+  "version": "1.0.0",
+  "description": "React-Express-Boilerplate by Trung Nguyen Lan",
+  "main": "server-dist",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server-dist",
+    "server-compile": "npx babel --watch server/ --out-dir server-dist",
+    "server-run": "nodemon --watch server-dist",
+    "server": "concurrently \"npm run server-*\"",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "@babel/preset-env": "^7.3.4",
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "firebase-admin": "^7.2.0",
+    "multer": "^1.4.1"
+  }
+}

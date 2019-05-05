@@ -1,0 +1,5 @@
+/node_modules
+.vscode
+
+#for server the uncomment the following folder
+#server/

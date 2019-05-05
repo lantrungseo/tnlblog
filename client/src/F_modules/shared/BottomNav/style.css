@@ -1,0 +1,22 @@
+.bottom-nav--container{
+  width: 100%;
+  position: absolute;
+  bottom : 0;
+  left: 0;
+  background : rgb(236, 235, 235);
+  color : black;
+  height: 25px;
+  display: table;
+  border-spacing: 0;
+  table-layout: fixed;
+  cursor: pointer;
+}
+.bottom-nav--container span{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.bottom-nav--container span:hover{
+  background: rgb(189, 186, 186);
+
+}

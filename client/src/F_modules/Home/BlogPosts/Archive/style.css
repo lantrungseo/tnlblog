@@ -1,0 +1,22 @@
+.archive-container{
+  width: 90%;
+  text-align: center;
+  margin: 50px auto;
+}
+.archive-container .archive-story{
+  width: 100%;
+  margin: 10px 2%;
+  max-height: 100px;
+  float: left;
+  cursor: pointer;
+}
+.archive-container .archive-story img{
+  max-width: 120px;
+  max-height: 120px;
+  float: left;
+  object-fit: fill;
+}
+.archive-container .archive-story h4{
+  vertical-align: 30%;
+  word-wrap: break-word;
+}
