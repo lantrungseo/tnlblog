@@ -34,7 +34,7 @@ class Auth extends Component{
     let {isAuthed, fbLogin,redditLogin} = this.props;
     return(
       <Fragment>
-        <div className = {`auth-container ${(isAuthed ? 'auth-active': '')}`}>
+        <div className = {`auth-container ${(isAuthed ? 'inactive': '')}`}>
           <span
             className = "auth-button reddit"
             onClick = {e=>redditLogin()}
@@ -48,7 +48,7 @@ class Auth extends Component{
             <span className = "fab fa-facebook-f"></span>
           </span>
         </div>
-        <div className = {`user-info-container ${isAuthed ? '' : 'auth-active'}`}>
+        <div className = {`user-info-container ${isAuthed ? '' : 'inactive'}`}>
           <img src = {sessionStorage.getItem('user_picture')}/>
           <p>{sessionStorage.getItem('user_name')}</p>
         </div>

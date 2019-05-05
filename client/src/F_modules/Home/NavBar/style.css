@@ -20,6 +20,7 @@
   float: right;
   cursor: pointer;
   padding: 5px 20px;
+  color: white;
 }
 
 .navbar-container .mobile-nav .mobile-nav__content{ 
@@ -45,6 +46,7 @@
 }
 
 .navbar-container .mobile-nav .logo{
+  color: white;
   margin: 30px;
 }
 

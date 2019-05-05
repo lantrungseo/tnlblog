@@ -136,7 +136,6 @@
       .modal-overlay{
         position: fixed; /* Stay in place */
         z-index: 1000; /* Sit on top */
-        padding-top: 100px; /* Location of the box */
         left: 0;
         top: 0;
         width: 100%; /* Full width */
@@ -152,9 +151,13 @@
         font-weight: bold;
         cursor : pointer;
         color: white;
+        z-index: 1200;
       }
       .modal-overlay--close__icon:hover{
         color: rgb(246, 250, 12);
+      }
+      .inactive{
+        display: none;
       }
     </style>
   </head>
