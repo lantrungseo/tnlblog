@@ -20,7 +20,7 @@ class PrivateRoute extends Component {
           authCheckTimeOut : true
         })
       )
-    }, 2000)
+    }, 1500)
   }
   componentWillUnmount(){
     clearTimeout(this.timer);

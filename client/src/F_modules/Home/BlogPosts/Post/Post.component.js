@@ -10,7 +10,9 @@ export default class extends Component{
         <span 
           className = "modal-overlay--close fas fa-times"
         ></span>
-        
+        <div className = "post-container">
+          
+        </div>
       </div>
     )
   }
