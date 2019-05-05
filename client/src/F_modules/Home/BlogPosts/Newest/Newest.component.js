@@ -11,7 +11,7 @@ export default class extends Component{
     let dataKeys = keysArr.slice(1,4);
     return (
       <div className = "newest-container card-effect">
-        <a className = "top-story-container card-effect" href = "/post">
+        <a className = "top-story-container card-effect" href = {`post/${keysArr[0]}`}>
           {
             (()=>{
               let topStory = posts[keysArr[0]];
@@ -37,12 +37,12 @@ export default class extends Component{
                 thumbnailURL = hotStory.images[Object.keys(hotStory.images)[0]].url;
               }
               return(
-                  <div className = "hot-story card-effect" key ={key}>
+                  <a className = "hot-story card-effect" key ={key} href = {`post/${key}`}>
                     <img src = {thumbnailURL}/>
                     <h4>
                     {hotStory.title.length >=40 ? `${hotStory.title.substr(0,39)}...`: hotStory.title}
                     </h4>
-                  </div> 
+                  </a> 
               )
             })
           }

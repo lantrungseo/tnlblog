@@ -19,12 +19,12 @@ export default class extends Component{
               thumbnailURL = story.images[Object.keys(story.images)[0]].url;
             }
             return(
-                <div className = "archive-story card-effect" key = {key}>
+                <a className = "archive-story card-effect" key = {key} href = {`post/${key}`}>
                   <img src = {thumbnailURL}/>
                   <h4>
                     {story.title.length >=40 ? `${story.title.substr(0,39)}...`: story.title}
                   </h4>
-                </div>
+                </a>
             );
           })
         }

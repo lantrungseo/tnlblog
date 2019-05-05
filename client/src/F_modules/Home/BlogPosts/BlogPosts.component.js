@@ -27,7 +27,11 @@ class BlogPosts extends Component{
       <div className = "blog-posts-container">
         <Newest posts = {posts} defaultThumbnailURL = {defaultThumbnailURL}/>
         <Archive posts = {posts} defaultThumbnailURL = {defaultThumbnailURL}/>
-        <Route component = {Post} path = "/post"/>
+        <Route exact path = "/post/:id" render = {
+          ({match})=>(
+            <Post posts = {posts} postID = {match.params.id}/>
+          )
+        }/>
       </div>
     )
   }
