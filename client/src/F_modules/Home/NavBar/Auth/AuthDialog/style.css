@@ -1,26 +1,3 @@
-.auth-dialog--modal{
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-.auth-dialog--close__icon{
-  position: fixed;
-  top : 5%;
-  right: 5%;
-  font-size: 2em;
-  font-weight: bold;
-  cursor : pointer;
-}
-.auth-dialog--close__icon:hover{
-  color : rgba(117, 119, 119, 1)
-}
-
 .auth-dialog--content{
   width: 90%;
   height: 40%;

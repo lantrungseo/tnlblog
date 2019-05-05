@@ -37,8 +37,8 @@ export default class extends Component{
     let {loaderTimeout, show} = this.state;
     if(show){
       return(
-        <div className = "auth-dialog--modal">
-          <span className = "auth-dialog--close__icon fas fa-times"
+        <div className = "modal-overlay">
+          <span className = "modal-overlay--close__icon fas fa-times"
             onClick = {this.closeDialog}
           >
           </span>
