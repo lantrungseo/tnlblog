@@ -11,7 +11,7 @@ export default class extends Component{
     let dataKeys = keysArr.slice(1,4);
     return (
       <div className = "newest-container card-effect">
-        <div className = "top-story-container card-effect">
+        <a className = "top-story-container card-effect" href = "/post">
           {
             (()=>{
               let topStory = posts[keysArr[0]];
@@ -27,7 +27,7 @@ export default class extends Component{
               )
             })()
           }
-        </div>
+        </a>
         <div className = "hot-stories-container">
           {
             dataKeys.map((key)=>{

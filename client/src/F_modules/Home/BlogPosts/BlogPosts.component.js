@@ -4,6 +4,8 @@ import './style.css'
 //components
 import Newest from './Newest/Newest.component'
 import Archive from './Archive/Archive.component'
+import Post from './Post/Post.component'
+import {Route} from 'react-router-dom'
 //redux
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
@@ -14,6 +16,7 @@ const defaultThumbnailURL = "https://i0.wp.com/www.tryoopedia.com/wp-content/upl
 class BlogPosts extends Component{
   componentDidMount(){
     this.props.getPosts();
+    
   }
   render(){
     let {posts} = this.props;
@@ -24,6 +27,7 @@ class BlogPosts extends Component{
       <div className = "blog-posts-container">
         <Newest posts = {posts} defaultThumbnailURL = {defaultThumbnailURL}/>
         <Archive posts = {posts} defaultThumbnailURL = {defaultThumbnailURL}/>
+        <Route component = {Post} path = "/post"/>
       </div>
     )
   }

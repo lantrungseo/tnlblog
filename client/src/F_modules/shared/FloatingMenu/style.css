@@ -10,7 +10,6 @@
 }
 
 .floating-menu--container a{
-  text-decoration: none;
   cursor: pointer;
   padding: 10px auto;
   width:100%;

@@ -8,7 +8,8 @@
   width: 100%;
   float: left;
   margin: 0;
-  cursor: pointer
+  cursor: pointer;
+  color: black;
 }
 .newest-container .top-story-container img{
   width: 100%;

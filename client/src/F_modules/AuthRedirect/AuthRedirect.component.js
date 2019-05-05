@@ -11,7 +11,7 @@ export default class extends Component{
       window.close();
     }, 1500) 
   }
-  componentWillMount(){
+  componentWillUnmount(){
     clearTimeout(this.timer);
   }
   render(){

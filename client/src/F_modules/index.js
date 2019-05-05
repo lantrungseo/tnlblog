@@ -6,6 +6,7 @@ import PrivateRoute from './shared/PrivateRoute/PrivateRoute.component'
 import Admin from './Admin/Admin.component'
 import Home from './Home/Home.component'
 import AuthRedirect from './AuthRedirect/AuthRedirect.component'
+
 //redux
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
@@ -24,7 +25,7 @@ class App extends Component {
       <Router>
         <Switch>
           <PrivateRoute exact path = "/admin" component = {Admin}/>
-          <Route exact path = "/" component = {Home}/>
+          <Route path = "/" component = {Home}/>
           <Route exact path = "/auth/redirect" component = {AuthRedirect}/>
         </Switch>
       </Router>

@@ -8,7 +8,6 @@
   padding: 5px 20px;
   cursor: pointer;
   color: white;
-  text-decoration: none;
 }
 .mobile-subnav .mobile-nav__link:hover{ 
   background-color: grey;
@@ -43,7 +42,6 @@
     color: rgb(43, 41, 41);
     font-family: sans-serif;
     font-weight: 100;
-    text-decoration: none;
     user-select: none;
     transition: 0.25s ease;
   }

@@ -72,7 +72,6 @@
   .navbar-container .nav .nav__link a{
     padding: 10px 20px;
     cursor: pointer;
-    text-decoration: none;
     color : white;
     vertical-align: middle;
   }
