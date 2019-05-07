@@ -25,12 +25,12 @@
 /*left, right arrow*/
 .post-carousel-container .post-carousel--icon{
   position: absolute;
-  font-size: 2em;
-  color: white;
+  font-size: 1.5em;
+  color: rgb(122, 118, 118);
   cursor: pointer;
 }
 .post-carousel-container .post-carousel--icon:hover{
-  color: yellow;
+  color:white;
 }
 .post-carousel-container .post-carousel--icon.fa-chevron-left{
   left: 20px;

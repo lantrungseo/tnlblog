@@ -27,6 +27,7 @@
 }
 .auth-dialog--content a{
   color : black;
+  text-decoration: underline;
 }
 .auth-dialog--content a img{
   width: 50px;

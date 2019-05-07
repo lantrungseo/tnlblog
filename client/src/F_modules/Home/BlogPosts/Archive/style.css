@@ -19,4 +19,5 @@
 .archive-container .archive-story h4{
   vertical-align: 30%;
   word-wrap: break-word;
+  text-overflow: ellipsis;
 }

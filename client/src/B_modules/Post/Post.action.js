@@ -23,11 +23,12 @@ const gettingPosts = ()=>({
 export const getPosts = ()=>{
   return async (dispatch)=>{
     dispatch(gettingPosts());
-    let [{data: posts}, err] = await wrapPromise(getPostData());
+    let [res, err] = await wrapPromise(getPostData());
     if(err){
       dispatch(failGetPosts());
       return;
     }
+    let {data: posts} = res;
     dispatch(succeedGetPosts(posts));
   }
 }

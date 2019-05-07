@@ -40,7 +40,7 @@ export default class extends Component{
                   <a className = "hot-story card-effect" key ={key} href = {`post/${key}`}>
                     <img src = {thumbnailURL}/>
                     <h4>
-                    {hotStory.title.length >=40 ? `${hotStory.title.substr(0,39)}...`: hotStory.title}
+                      {hotStory.title}
                     </h4>
                   </a> 
               )

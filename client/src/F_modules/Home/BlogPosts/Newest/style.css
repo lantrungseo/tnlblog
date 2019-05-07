@@ -14,6 +14,9 @@
   width: 100%;
   max-height: 330px;
 }
+.newest-container .top-story-container h4{
+  text-overflow: ellipsis;
+}
 .newest-container .hot-stories-container{
   width: 100%;
   float: left;
@@ -36,6 +39,7 @@
 .newest-container .hot-stories-container .hot-story h4{
   vertical-align: 20%;
   word-wrap: break-word;
+  text-overflow: ellipsis;
 }
 
 @media only screen and (min-width: 750px){
