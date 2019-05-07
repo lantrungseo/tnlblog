@@ -26,7 +26,7 @@ export default class extends Component{
         <Carousel images = {images}/>
         <div 
           className
-          = {`post-container card-effect ${(this.state.isContentOpen ? "" : "inactive")}`}
+          = {`post-container card-effect ${(this.state.isContentOpen ? "css-slide-down" : "css-slide-up")}`}
         >
             <h3>{title}</h3>
             {ReactHTMLParser(content)}

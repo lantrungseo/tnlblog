@@ -1,9 +1,10 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 //styles
 import './style.css'
 //components
 import BottomNav from '../BottomNav/BottomNav.component'
 import Recaptcha from 'react-recaptcha'
+import Media from './Media/Media.component'
 //redux
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
@@ -11,7 +12,12 @@ import {publish} from '../../../B_modules/Publish/Publish.action'
 
 const initialState = {
   title: "",
-  content: "",
+  contents: [
+    {
+      imageIndex: -1, 
+      content: ""
+    }
+  ],
   imgs: []
 }
 
@@ -44,29 +50,6 @@ class Publish extends Component{
             <h4>Create post</h4>
         </div>
         <div className = "publish-content"> 
-            <div className = "image-list">
-              {
-                this.state.imgs.map((img, index)=>{
-                  if(img){
-                    let {localUrl : imgLocalUrl} = img;
-                    return (
-                      <div className = "image-display" key = {index}>
-                        <img src = {imgLocalUrl} ></img>   
-                        <div className = "overlay">
-                          <span className = "fas fa-times" 
-                            onClick = {()=>this.eraseImage(index)}
-                          >
-                          </span> 
-                        </div>
-                      </div>
-                    )
-                  }
-                  else{
-                    return null;
-                  }
-                })     
-              }
-            </div>
             <input 
               placeholder = "....Post title here" type = "text"
               onChange = {e=>this.saveData('title', e.target.value)}
@@ -74,9 +57,33 @@ class Publish extends Component{
             <div className = "publish-text">
               <div 
                 contentEditable = {true} className = "textarea"
-                placeholder = "....Text content here"
-                onBlur = {e=>this.saveData('content', e.target.innerHTML)}
+                placeholder = "....Content here"
+                onBlur = {e=>this.saveData('contents', e.target.innerHTML, 0)}
               ></div>
+              {
+                this.state.contents.map(
+                  (chunk, index)=>{
+                    if(index == 0){
+                      return null;
+                    }
+                    let {imgs} = this.state;
+                    return (
+                      <Fragment key = {index}>
+                        <Media 
+                          image = {imgs[chunk.imageIndex]} 
+                          num = {chunk.imageIndex}
+                          eraseImage = {this.eraseImage}
+                        />
+                        <div 
+                          contentEditable = {true} className = "textarea"
+                          placeholder = "....Continue to write here"
+                          onBlur = {e=>this.saveData('contents', e.target.innerHTML, index)}
+                        ></div>
+                      </Fragment>
+                    )
+                  }
+                )
+              }
             </div>
         </div>
         <div className = "publish-functional">
@@ -89,10 +96,11 @@ class Publish extends Component{
           </div>
         </div>
         <Recaptcha 
-            className = "recaptcha"
+            size = "normal"
             sitekey = "6LeDAZ4UAAAAAMysqNfSY1ni1ryieo69x6nlacIM"
             render = "explicit"
             badge = "inline"
+            className = "recaptcha"
             verifyCallback = {this.onRecaptchaResponse}
           />
         <BottomNav>
@@ -116,6 +124,21 @@ class Publish extends Component{
       </div>
     )
   }
+  //add new parts started by an image
+  addNewChunk = ()=>{
+    this.setState(
+      (prevState)=>({
+        ...prevState,
+        contents :[
+          ...prevState['contents'],
+          {
+            imageIndex : prevState['contents'].length-1,
+            content : ""
+          }
+        ]
+      })
+    )
+  }
   //recaptcha response
   onRecaptchaResponse = (token)=>{
     this.saveData("recaptchaToken", token)
@@ -132,7 +155,7 @@ class Publish extends Component{
     ).length > 0
   }
   //saving data
-  saveData = (key, data)=>{
+  saveData = (key, data, index = 0)=>{
     if(!data){
       return;
     }
@@ -164,10 +187,22 @@ class Publish extends Component{
                 }]
               })
             )
+            //after saving image, please add a new chunk start with this image
+            this.addNewChunk();
           }
           data.value = null;
         }
         image.src = localUrl;
+        return;
+      }
+      case 'contents':{
+        this.setState(
+          (prevState)=>{
+            let newState = {...prevState};
+            newState[key][index].content = data
+            return newState;
+          }
+        )
         return;
       }
       default:{
@@ -183,12 +218,19 @@ class Publish extends Component{
   }
   //erase image
   eraseImage = (index)=>{
-    let {imgs}  = this.state;
+    let {imgs, contents}  = this.state;
     imgs.splice(index, 1);
+    //because imgs[index] was spliced from the array, so we should decrease the imageIndex onwards
+    for(let i = index+1; i < contents.length; ++i){
+      --contents[i].imageIndex;
+    }
+    //only the images was deleted, not the contents being written
+    contents[index].imageIndex =  -1;
     this.setState(
       prevState=>({
         ...prevState,
-        imgs
+        imgs,
+        contents
       })
     )
   }

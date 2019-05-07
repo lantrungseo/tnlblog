@@ -32,11 +32,11 @@ export const publish = (data)=>{
 }
 
 //helpers
-const sendPostToServer = async ({imgs, title, content, recaptchaToken}, isInQueue)=>{
+const sendPostToServer = async ({imgs, title, contents, recaptchaToken}, isInQueue)=>{
   if(!title){
     throw new Error("You must enter title");
   }
-  if(!content){
+  if(!contents){
     throw new Error("You must enter content");
   }
   if(!recaptchaToken){
@@ -44,7 +44,7 @@ const sendPostToServer = async ({imgs, title, content, recaptchaToken}, isInQueu
   }
   let data = new FormData();
   data.append('title', title);
-  data.append('content', content);
+  data.append('contents', contents);
   imgs.forEach((img)=>{
     data.append('images', img.file)
   })

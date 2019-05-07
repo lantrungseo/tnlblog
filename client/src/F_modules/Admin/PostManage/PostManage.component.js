@@ -10,7 +10,7 @@ import {connect} from 'react-redux'
 class PostManage extends Component{
   render(){
     return (
-      <div className = "post-container" id = "post">
+      <div className = "post-manage-container" id = "post">
         <Publish isInQueue = {false}/>
       </div>
     )

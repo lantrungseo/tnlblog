@@ -25,8 +25,8 @@ class App extends Component {
       <Router>
         <Switch>
           <PrivateRoute exact path = "/admin" component = {Admin}/>
-          <Route path = "/" component = {Home}/>
           <Route exact path = "/auth/redirect" component = {AuthRedirect}/>
+          <Route path = "/" component = {Home}/>
         </Switch>
       </Router>
     );

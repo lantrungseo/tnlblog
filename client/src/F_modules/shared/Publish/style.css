@@ -1,66 +1,24 @@
 .publish-container{
   width: 90%;
   background: rgb(253, 253, 248);
-  color: rgb(56, 56, 77);
+  color: rgb(27, 27, 36);
   min-height: 390px;
   position : relative;
   max-width: 700px;
-  margin: auto;
+  margin: 0 auto;
+  top: 30px;
 }
 .publish-container .publish-header{
-  width: 100%;
+  width: 90%;
   max-height: 30px;
   padding: 10px 10px 0 0;
-  margin: 20px 7%;
-}
-.publish-container .publish-header h4{
-  vertical-align: middle;
+  margin: 10px 7%;
 }
 .publish-container .publish-content{
   width: 100%;
   max-height: 90%;
   text-align: center;
   bottom: 40px;
-}
-/*image preview*/
-.publish-container .publish-content .image-list{
-  width: 95%;
-  min-height: 20px;
-  max-height: 80px;
-  overflow-x : auto;
-  margin: 10px 7%;
-}
-.publish-container .publish-content .image-list .image-display{
-  width: 80px;
-  height: 80px;
-  position: relative;
-  float: left;
-
-}
-.publish-container .publish-content .image-list .image-display img{
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-.publish-container .publish-content .image-list .image-display:hover > .overlay{
-  background: rgba(0,0,0, 0.5);
-  position: relative;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-}
-.publish-container .publish-content .image-list .image-display .overlay span.fa-times{
-  width: 20%;
-  height: 20%;
-  color : rgb(255, 255, 255);
-  position: absolute;
-  right: 0;
-  top: 0;
-  cursor: pointer;
-  z-index: 1;
 }
 .publish-container .publish-content .image-list .image-display span.fa-times:hover{
   color: rgb(230, 221, 240);
@@ -73,20 +31,22 @@
   border: none;
   background : transparent;
   text-indent: 5px;
+  height: 30px;
 }
 .publish-container .publish-content .publish-text{
   width: 100%;
 }
 
 .publish-container .publish-content .publish-text .textarea{
-  margin:auto;
+  margin: 20px auto;
   border: none;
   width: 86%;
   cursor: text;
   text-align: left;
-  min-height: 150px;
+  min-height: 50px;
   text-indent: 5px;
   padding: 10px;
+  display: block;
 }
 
 /*functionalities*/
@@ -130,7 +90,7 @@
 .publish-container .recaptcha{
   position: relative;
   bottom: 40px;
-  left: 6%;
-  width: 10%;
+  left: 5%;
+  max-width: 200px;
 }
 

@@ -12,6 +12,11 @@ import {bindActionCreators} from 'redux'
 import {getPosts} from '../../../B_modules/Post/Post.action'
 
 const defaultThumbnailURL = "https://i0.wp.com/www.tryoopedia.com/wp-content/uploads/2019/03/wordpress_ping_list.jpg?fit=680%2C380&ssl=1";
+/*<Route exact path = "/post/:id" render = {
+          ({match})=>(
+            <Post posts = {posts} postID = {match.params.id}/>
+          )
+}/>*/
 
 class BlogPosts extends Component{
   componentDidMount(){
@@ -27,11 +32,6 @@ class BlogPosts extends Component{
       <div className = "blog-posts-container">
         <Newest posts = {posts} defaultThumbnailURL = {defaultThumbnailURL}/>
         <Archive posts = {posts} defaultThumbnailURL = {defaultThumbnailURL}/>
-        <Route exact path = "/post/:id" render = {
-          ({match})=>(
-            <Post posts = {posts} postID = {match.params.id}/>
-          )
-        }/>
       </div>
     )
   }

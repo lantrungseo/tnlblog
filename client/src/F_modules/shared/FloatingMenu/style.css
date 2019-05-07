@@ -1,12 +1,12 @@
 .floating-menu--container{
   position : fixed;
-  bottom: calc(8vh + 50px);
-  right: calc(8vw + 30px);
+  bottom: 70px;
+  right: 50px;
   background: rgb(77, 75, 75);
   width: 80%;
   max-width: 200px;
   text-align: center;
-  z-index: 1;
+  z-index: 4;
 }
 
 .floating-menu--container a{

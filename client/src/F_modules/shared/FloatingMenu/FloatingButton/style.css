@@ -4,8 +4,9 @@
   border-radius: 50px;
   border: none;
   position: fixed;
-  bottom: 8vh;
-  right: 8vw;
+  bottom: 20px;
+  right: 20px;
   background-color : rgb(202, 8, 202);
   color: whitesmoke;
+  z-index: 4;
 }
