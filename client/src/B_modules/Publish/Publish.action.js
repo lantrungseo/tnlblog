@@ -44,7 +44,7 @@ const sendPostToServer = async ({imgs, title, contents, recaptchaToken}, isInQue
   }
   let data = new FormData();
   data.append('title', title);
-  data.append('contents', contents);
+  data.append('contents', JSON.stringify(contents));
   imgs.forEach((img)=>{
     data.append('images', img.file)
   })

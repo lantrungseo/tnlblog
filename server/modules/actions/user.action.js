@@ -27,9 +27,6 @@ export const verifyUserToken  = async (accountType, accessToken, isDataSave=fals
     throw new Error('bitch, invalidate token')
   } 
   let {data: userData} = result;
-  if(accountType === "reddit"){
-    console.log(userData);
-  }
   userData = filterUserData(accountType, userData)
   if(isDataSave){
     let [, saveUserErr] = await wrapPromise(saveUser(accountType, userData))
@@ -71,6 +68,8 @@ export const verifyCaptcha  = async (captchaToken)=>{
   )
 
   if(err || !data.success){
+    console.log("captcha err ", err);
+    console.log(data);
     throw new Error("invalidate captcha");
   }
   return "ok";

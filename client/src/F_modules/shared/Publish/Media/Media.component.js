@@ -5,7 +5,7 @@ import './style.css'
 export default class extends Component{
   render(){
     let {image, num, eraseImage} = this.props;
-    if(num===-1){
+    if(!image){
       return null;
     }
     let {localUrl : imgLocalUrl} = image;

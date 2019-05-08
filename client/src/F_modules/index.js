@@ -6,6 +6,7 @@ import PrivateRoute from './shared/PrivateRoute/PrivateRoute.component'
 import Admin from './Admin/Admin.component'
 import Home from './Home/Home.component'
 import AuthRedirect from './AuthRedirect/AuthRedirect.component'
+import Post from './Post/Post.component'
 
 //redux
 import {connect} from 'react-redux';
@@ -26,7 +27,12 @@ class App extends Component {
         <Switch>
           <PrivateRoute exact path = "/admin" component = {Admin}/>
           <Route exact path = "/auth/redirect" component = {AuthRedirect}/>
-          <Route path = "/" component = {Home}/>
+          <Route exact path = "/" component = {Home}/>
+          <Route exact path = "/post/:id" render = {
+            ({match})=>(
+              <Post postID = {match.params.id}/>
+            )
+          }/>
         </Switch>
       </Router>
     );

@@ -4,19 +4,13 @@ import './style.css'
 //components
 import Newest from './Newest/Newest.component'
 import Archive from './Archive/Archive.component'
-import Post from './Post/Post.component'
-import {Route} from 'react-router-dom'
+
 //redux
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {getPosts} from '../../../B_modules/Post/Post.action'
 
 const defaultThumbnailURL = "https://i0.wp.com/www.tryoopedia.com/wp-content/uploads/2019/03/wordpress_ping_list.jpg?fit=680%2C380&ssl=1";
-/*<Route exact path = "/post/:id" render = {
-          ({match})=>(
-            <Post posts = {posts} postID = {match.params.id}/>
-          )
-}/>*/
 
 class BlogPosts extends Component{
   componentDidMount(){

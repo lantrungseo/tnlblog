@@ -26,16 +26,9 @@ export const checkAdmin = async(userID)=>{
   return userAdminSnapshot.val()
 }
 
-export const savePost = async(title, content, imgsNum, endpoint = "queue")=>{
+export const savePost = async(title, contents, imgsNum, endpoint = "queue")=>{
   let newPostRef = db.ref(`posts/${endpoint}`).push();
-  let [, setPostErr] =  await wrapPromise(
-    newPostRef.set({
-      title, content
-    })
-  )
-  if(setPostErr){
-    return new Error(setPostErr);
-  }
+  //push images first with fake urls
   let imageFakeURLs = [];
   let newImagesRef = newPostRef.child("images");
   for(let cnt = 1; cnt <= imgsNum; ++cnt){
@@ -43,7 +36,7 @@ export const savePost = async(title, content, imgsNum, endpoint = "queue")=>{
   }
   let [imageIDs, setImageErr] = await wrapPromise(
     Promise.all(
-      imageFakeURLs.map(async (url)=>{
+      imageFakeURLs.map(async(url)=>{
         let imageRef= newImagesRef.push()
         let [, setImageFakeErr] = await wrapPromise(
           imageRef.set({
@@ -60,6 +53,41 @@ export const savePost = async(title, content, imgsNum, endpoint = "queue")=>{
   if(setImageErr){
     console.log(setImageErr);
     throw new Error(setImageErr)
+  }
+  //set contents and title
+  let newPostContentRef = newPostRef.child("contents");
+  let [res, setPostErr] =  await wrapPromise(
+    Promise.all([
+      ...contents.map(async(content)=>{
+        for(let contentKey in content){
+          if(contentKey==="imageIndex"){
+            if(content[contentKey]===-1){
+              content[contentKey] = null;
+            }
+            else{
+              content[contentKey] = imageIDs[content[contentKey]];
+            }
+          }
+          else{
+            if(!content[contentKey]){
+              content[contentKey] = null;
+            }
+          }
+        }
+        let[,setPostContentErr] = await wrapPromise(
+          newPostContentRef.push().set(content)
+        )
+        if(setPostContentErr){
+          throw new Error(setPostContentErr)
+        }
+        return "ok";
+      }),
+      newPostRef.child("title").set(title)
+    ])
+  )
+  if(setPostErr){
+    console.log(setPostErr);
+    throw new Error(setPostErr);
   }
   return {key: newPostRef.key, imageIDs};
 }

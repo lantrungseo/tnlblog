@@ -32,7 +32,7 @@ const publishPost = async ({
   isInQueue
 }, {
   title,
-  content,
+  contents,
   images
 }) => {
   //verify user and captcha
@@ -48,9 +48,10 @@ const publishPost = async ({
   let [{
     imageIDs,
     key: postKey
-  }, contentSaveErr] = await (0, _utilities.wrapPromise)((0, _db.savePost)(title, content, images.length, endpoint));
+  }, contentSaveErr] = await (0, _utilities.wrapPromise)((0, _db.savePost)(title, contents, images.length, endpoint));
 
   if (contentSaveErr) {
+    console.log(contentSaveErr);
     throw new Error(contentSaveErr);
   } //upload images
 

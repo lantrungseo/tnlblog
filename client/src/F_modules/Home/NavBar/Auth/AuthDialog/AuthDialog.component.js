@@ -30,7 +30,7 @@ export default class extends Component{
           loaderTimeout: true
         })
       )
-    }, 1500)
+    }, 1000)
   }
   render(){
     let {isAuthed, fbLogin, redditLogin} = this.props

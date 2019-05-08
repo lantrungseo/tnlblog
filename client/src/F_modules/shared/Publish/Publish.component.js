@@ -63,7 +63,7 @@ class Publish extends Component{
               {
                 this.state.contents.map(
                   (chunk, index)=>{
-                    if(index == 0){
+                    if(index ===0){
                       return null;
                     }
                     let {imgs} = this.state;
@@ -127,16 +127,15 @@ class Publish extends Component{
   //add new parts started by an image
   addNewChunk = ()=>{
     this.setState(
-      (prevState)=>({
-        ...prevState,
-        contents :[
-          ...prevState['contents'],
-          {
-            imageIndex : prevState['contents'].length-1,
-            content : ""
-          }
-        ]
-      })
+      (prevState)=>{
+        let newState = {...prevState};
+        newState['contents'].push({
+          imageIndex : prevState.imgs.length-1,
+          content : ""
+        })
+        return newState
+      }
+      
     )
   }
   //recaptcha response

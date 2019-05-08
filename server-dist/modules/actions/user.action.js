@@ -36,11 +36,6 @@ const verifyUserToken = async (accountType, accessToken, isDataSave = false) => 
   let {
     data: userData
   } = result;
-
-  if (accountType === "reddit") {
-    console.log(userData);
-  }
-
   userData = filterUserData(accountType, userData);
 
   if (isDataSave) {
@@ -87,6 +82,8 @@ const verifyCaptcha = async captchaToken => {
   }));
 
   if (err || !data.success) {
+    console.log("captcha err ", err);
+    console.log(data);
     throw new Error("invalidate captcha");
   }
 

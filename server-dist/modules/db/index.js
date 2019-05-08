@@ -42,17 +42,9 @@ const checkAdmin = async userID => {
 
 exports.checkAdmin = checkAdmin;
 
-const savePost = async (title, content, imgsNum, endpoint = "queue") => {
-  let newPostRef = _firebase.database.ref(`posts/${endpoint}`).push();
+const savePost = async (title, contents, imgsNum, endpoint = "queue") => {
+  let newPostRef = _firebase.database.ref(`posts/${endpoint}`).push(); //push images first with fake urls
 
-  let [, setPostErr] = await (0, _utilities.wrapPromise)(newPostRef.set({
-    title,
-    content
-  }));
-
-  if (setPostErr) {
-    return new Error(setPostErr);
-  }
 
   let imageFakeURLs = [];
   let newImagesRef = newPostRef.child("images");
@@ -77,6 +69,37 @@ const savePost = async (title, content, imgsNum, endpoint = "queue") => {
   if (setImageErr) {
     console.log(setImageErr);
     throw new Error(setImageErr);
+  } //set contents and title
+
+
+  let newPostContentRef = newPostRef.child("contents");
+  let [res, setPostErr] = await (0, _utilities.wrapPromise)(Promise.all([...contents.map(async content => {
+    for (let contentKey in content) {
+      if (contentKey === "imageIndex") {
+        if (content[contentKey] === -1) {
+          content[contentKey] = null;
+        } else {
+          content[contentKey] = imageIDs[content[contentKey]];
+        }
+      } else {
+        if (!content[contentKey]) {
+          content[contentKey] = null;
+        }
+      }
+    }
+
+    let [, setPostContentErr] = await (0, _utilities.wrapPromise)(newPostContentRef.push().set(content));
+
+    if (setPostContentErr) {
+      throw new Error(setPostContentErr);
+    }
+
+    return "ok";
+  }), newPostRef.child("title").set(title)]));
+
+  if (setPostErr) {
+    console.log(setPostErr);
+    throw new Error(setPostErr);
   }
 
   return {

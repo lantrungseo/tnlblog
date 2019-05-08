@@ -14,7 +14,7 @@ export const getPosts = async (isVerified)=>{
 
 export const publishPost = async(
   {accountType, accessToken, recaptchaToken, isInQueue}, 
-  {title, content, images}
+  {title, contents, images}
 )=>{
   //verify user and captcha
   let[,verifyError] = await wrapPromise(
@@ -27,13 +27,15 @@ export const publishPost = async(
     console.log(verifyError);
     throw new Error(verifyError);
   }
-
-//save the main content (text content). Retrieve distinct IDs for images
+  //save the main content (text content). Retrieve distinct IDs for images
   let endpoint = (isInQueue ? "queue" : "verified");
+
   let [{imageIDs, key: postKey}, contentSaveErr] = await wrapPromise(
-    savePost(title, content, images.length, endpoint)
+    savePost(title, contents, images.length, endpoint)
   );
+
   if(contentSaveErr){
+    console.log(contentSaveErr);
     throw new Error(contentSaveErr);
   }
   //upload images
@@ -49,6 +51,7 @@ export const publishPost = async(
     console.log(uploadImgErr);
     throw new Error(uploadImgErr);
   }
+  
   let [, saveImageToPostErr] = await wrapPromise(
     saveImageToPost(imageIDs, uploadImgURLs, endpoint, postKey)
   )
@@ -56,5 +59,6 @@ export const publishPost = async(
     console.log(saveImageToPostErr);
     throw new Error(saveImageToPostErr);
   }
+  
   return "ok";
 }
