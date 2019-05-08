@@ -1,70 +1,73 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 //styles
 import './style.css'
 //components
 import {Link} from 'react-router-dom'
 import Carousel from './Carousel/Carousel.component'
 import ReactHTMLParser from 'react-html-parser'
+//redux
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {getPosts} from '../../B_modules/Post/Post.action'
 
-export default class extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      isContentOpen : false
-    }
+class Post extends Component{
+  componentDidMount(){
+    let {postID, getPost}  = this.props;
+    getPost(postID);
   }
   render(){
-    let {posts, postID} = this.props;
-    let myPost= posts[postID];
-    let{images, title, content} = myPost;
+    let {post} = this.props;
+    if(!post){
+      return null;
+    }
+    let {contents, images, title} = post;
     return(
-      <div className = "modal-overlay">
-        <Link
-          className = "modal-overlay--close__icon fas fa-times"
-          to = "/"
-        ></Link>
-        <Carousel images = {images}/>
-        <div 
-          className
-          = {`post-container card-effect ${(this.state.isContentOpen ? "css-slide-down" : "css-slide-up")}`}
-        >
-            <h3>{title}</h3>
-            {ReactHTMLParser(content)}
-            
-        </div>
-        <div className = "post-footer" onClick = {()=>this.toggleContent()}>
-          <h3>
-            {title}
+      <div className = "post-container">
+        <div className = "post-header">
+          <Link to = "/">
+            <span className = "fas fa-chevron-left">
             &ensp;
-            <span 
-              className =  {
-                (()=>{
-                  if(!images){
-                    return 'inactive'
-                  }
-                  let {isContentOpen} = this.state;
-                  if(isContentOpen){
-                    return 'fas fa-chevron-down'
-                  }
-                  else{
-                    return 'fas fa-chevron-up'
-                  }
-                })()
-              }
-            >
+              MAIN PAGE
             </span>
-          </h3>
-          
+            
+          </Link>
+        </div>
+        <div className = "post-carousel">
+          <Carousel images = {images}/>
+        </div>
+        <div className = "post-content">
+          <h1>{title}</h1>
+          {Object.keys(contents).map(
+            (contentKey)=>{
+              let data = contents[contentKey];
+              let {imageIndex, content} = data;
+              return(
+                <Fragment key = {contentKey}>
+                  {
+                    (
+                      imageIndex ?
+                      <img src = {images[imageIndex].url} className = "post-content-image"/>
+                      : null
+                    )
+                  }
+                  <div>{ReactHTMLParser(content)}</div>
+                </Fragment>
+              )
+            }
+          )}
         </div>
       </div>
     )
   }
-  toggleContent = (e)=>{
-    this.setState(
-      (prevState)=>({
-        ...prevState,
-        isContentOpen : !prevState.isContentOpen
-      })
-    )
-  }
 }
+
+const mapStateToProps = (state)=>({
+  post : state.PostReducer.postData
+})
+
+const mapDispatchToProps = (dispatch)=>({
+  getPost : bindActionCreators(getPosts, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post)
+

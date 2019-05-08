@@ -32,7 +32,7 @@ class BlogPosts extends Component{
 }
 
 const mapStateToProps = (state)=>({
-  posts : state.PostReducer.posts
+  posts : state.PostReducer.postData
 });
 
 const mapDispatchToProps = (dispatch)=>({

@@ -2,9 +2,9 @@ import {wrapPromise} from '../utilities'
 import {getPostData, savePost, uploadImage, saveImageToPost} from '../db'
 import {verifyCaptcha, verifyUserToken} from './user.action'
 
-export const getPosts = async (isVerified)=>{
+export const getPosts = async (isVerified, id = "")=>{
   let endpoint = (isVerified ? "verified" : "queue");
-  let [data, err] = await wrapPromise(getPostData(endpoint));
+  let [data, err] = await wrapPromise(getPostData(endpoint, id));
   if(err){
     throw new Error("could not access the posts data");
   }

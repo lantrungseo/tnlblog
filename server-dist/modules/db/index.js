@@ -157,8 +157,8 @@ const saveImageToPost = async (imageKeys, imageURLs, endpoint, key) => {
 
 exports.saveImageToPost = saveImageToPost;
 
-const getPostData = async endpoint => {
-  return _firebase.database.ref(`posts/${endpoint}`).once("value");
+const getPostData = async (endpoint, id = "") => {
+  return _firebase.database.ref(`posts/${endpoint}/${id}`).once("value"); //if pagination added : just choose the limit number larger than number of children of a post
 }; //helpers
 
 

@@ -11,9 +11,9 @@ var _db = require("../db");
 
 var _user = require("./user.action");
 
-const getPosts = async isVerified => {
+const getPosts = async (isVerified, id = "") => {
   let endpoint = isVerified ? "verified" : "queue";
-  let [data, err] = await (0, _utilities.wrapPromise)((0, _db.getPostData)(endpoint));
+  let [data, err] = await (0, _utilities.wrapPromise)((0, _db.getPostData)(endpoint, id));
 
   if (err) {
     throw new Error("could not access the posts data");

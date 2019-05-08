@@ -3,6 +3,7 @@
   height: 100%;
   position : relative;
   text-align: center;
+  z-index: 1;
 }
 
   /*overlay*/
@@ -26,18 +27,18 @@
 .post-carousel-container .post-carousel--icon{
   position: absolute;
   font-size: 1.5em;
-  color: rgb(122, 118, 118);
+  color: rgb(184, 176, 176);
   cursor: pointer;
 }
 .post-carousel-container .post-carousel--icon:hover{
   color:white;
 }
 .post-carousel-container .post-carousel--icon.fa-chevron-left{
-  left: 20px;
+  left: 30px;
   top: 40%;
 }
 .post-carousel-container .post-carousel--icon.fa-chevron-right{
-  right: 20px;
+  right: 30px;
   top: 40%;
 }
 /*content*/

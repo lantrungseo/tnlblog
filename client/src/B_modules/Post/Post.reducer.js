@@ -9,7 +9,7 @@ export default (state = initialState, action)=>{
   switch(type){
     case GETTING_POSTS: return {...state, getPostState : undefined}
     case GET_POSTS_FAILURE : return {...state, getPostState : "failed"}
-    case GET_POSTS_SUCCESS : return {...state, getPostState: "done", posts: data}
+    case GET_POSTS_SUCCESS : return {...state, getPostState: "done", postData: data}
     default : return state;
   }
 }

@@ -14,7 +14,7 @@ var _middlewares = require("../../config/middlewares");
 var _default = app => {
   app //get posts data
   .get("/posts/verified", async (req, res) => {
-    let [data, err] = await (0, _utilities.wrapPromise)((0, _post.getPosts)(true));
+    let [data, err] = await (0, _utilities.wrapPromise)((0, _post.getPosts)(true, req.query.id));
 
     if (err) {
       res.status(403).send(err);

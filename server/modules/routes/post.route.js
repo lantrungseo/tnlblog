@@ -5,7 +5,7 @@ export default (app)=>{
   app
     //get posts data
     .get("/posts/verified", async(req, res)=>{
-      let [data, err] = await wrapPromise(getPosts(true));
+      let [data, err] = await wrapPromise(getPosts(true, req.query.id));
       if(err){
         res.status(403).send(err);
       }

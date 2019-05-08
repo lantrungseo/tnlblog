@@ -132,8 +132,9 @@ export const saveImageToPost = async (imageKeys, imageURLs, endpoint, key)=>{
   )
 }
 
-export const getPostData = async (endpoint)=>{
-  return db.ref(`posts/${endpoint}`).once("value");
+export const getPostData = async (endpoint, id = "")=>{
+  return db.ref(`posts/${endpoint}/${id}`).once("value");
+  //if pagination added : just choose the limit number larger than number of children of a post
 }
 
 //helpers
