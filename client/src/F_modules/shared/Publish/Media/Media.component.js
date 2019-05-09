@@ -29,6 +29,9 @@ export default class extends Component{
   }
   changeTitle = (prevTitle)=>{
     let ans = prompt("Your new image title", prevTitle);
+    if(!ans || !ans.length){
+      ans = prevTitle;
+    }
     let {addImageTitle, num} = this.props;
     addImageTitle(num, ans);
   }
