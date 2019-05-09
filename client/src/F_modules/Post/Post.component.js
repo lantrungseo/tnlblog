@@ -32,9 +32,13 @@ class Post extends Component{
             
           </Link>
         </div>
-        <div className = "post-carousel">
-          <Carousel images = {images}/>
-        </div>
+        {
+          images ?
+          <div className = "post-carousel">
+            <Carousel images = {images}/>
+          </div>
+          : null
+        }
         <div className = "post-content">
           <h1>{title}</h1>
           {Object.keys(contents).map(

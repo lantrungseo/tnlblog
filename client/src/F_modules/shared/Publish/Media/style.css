@@ -1,13 +1,12 @@
 .image-list {
   width: 95%;
-  min-height: 20px;
-  max-height: 80px;
+  max-height: 100px;
   overflow-x : auto;
-  margin: 10px 6%;
+  margin: 20px 6%;
 }
 .image-list .image-display{
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   position: relative;
   float: left;
   margin :0;
@@ -36,18 +35,15 @@
   cursor: pointer;
   z-index: 1;
 }
+.image-list .image-display .overlay span:hover{
+  color: rgb(230, 221, 240);
+}
+
 .image-list .image-display .overlay span.fa-times{
   right: 0;
   top: 0;
 }
-.image-list .image-display .overlay span.fa-times:hover{
-  color: rgb(230, 221, 240);
-}
-
 .image-list .image-display .overlay span.fa-heading{
   bottom: 25%;
   left: 15%;
-}
-.image-list .image-display .overlay span.fa-heading:hover{
-  color: rgb(230, 221, 240);
 }

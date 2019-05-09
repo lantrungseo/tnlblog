@@ -22,7 +22,7 @@ export default class extends Component{
                 <a className = "archive-story card-effect" key = {key} href = {`post/${key}`}>
                   <img src = {thumbnailURL}/>
                   <h4>
-                    {story.title.length >=40 ? `${story.title.substr(0,39)}...`: story.title}
+                    {story.title}
                   </h4>
                 </a>
             );

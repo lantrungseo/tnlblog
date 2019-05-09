@@ -6,7 +6,7 @@
 .archive-container .archive-story{
   width: 100%;
   margin: 10px 2%;
-  max-height: 100px;
+  max-height: 120px;
   float: left;
   cursor: pointer;
 }

@@ -1,10 +1,12 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react'
 //styles
 import './style.css'
 //components
 import BottomNav from '../BottomNav/BottomNav.component'
 import Recaptcha from 'react-recaptcha'
-import Media from './Media/Media.component'
+import Functionalities from './Functionalities/Functionalities.component'
+import Content from './Content/Content.component'
+
 //redux
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
@@ -39,7 +41,7 @@ class Publish extends Component{
     if(cur !== next){
       if(next === "fail"){
         alert("fail to publish post :(");
-
+        this.RecaptchaInstance.reset();
       }
       if(next === "succeed"){
         alert("successfully publish post");
@@ -54,61 +56,24 @@ class Publish extends Component{
         <div className = "publish-header">
             <h4>Create post</h4>
         </div>
-        <div className = "publish-content"> 
-            <input 
-              placeholder = "....Post title here" type = "text"
-              onChange = {e=>this.saveData('title', e.target.value)}
-            />
-            <div className = "publish-text">
-              <div 
-                contentEditable = {true} className = "textarea"
-                placeholder = "....Content here"
-                onBlur = {e=>this.saveData('contents', e.target.innerHTML, 0)}
-              ></div>
-              {
-                this.state.contents.map(
-                  (chunk, index)=>{
-                    if(index ===0){
-                      return null;
-                    }
-                    let {imgs} = this.state;
-                    return (
-                      <Fragment key = {index}>
-                        <Media 
-                          image = {imgs[chunk.imageIndex]} 
-                          num = {chunk.imageIndex}
-                          eraseImage = {this.eraseImage}
-                          addImageTitle = {this.addImageTitle}
-                        />
-                        <div 
-                          contentEditable = {true} className = "textarea"
-                          placeholder = "....Continue to write here"
-                          onBlur = {e=>this.saveData('contents', e.target.innerHTML, index)}
-                        ></div>
-                      </Fragment>
-                    )
-                  }
-                )
-              }
-            </div>
-        </div>
-        <div className = "publish-functional">
-          <div className = "card-effect publish-photos">
-            <input type = "file" 
-              onChange = {e=>this.saveData('imgs', e.target)}
-              accept = "image/*"
-            />
-            <span className = "fas fa-images"> Photos </span>
-          </div>
-        </div>
+        <Content
+          saveData = {this.saveData}
+          contents = {this.state.contents}
+          imgs = {this.state.imgs}
+        />
+        <Functionalities
+          saveData = {this.saveData}
+        />
         <Recaptcha 
             size = "normal"
             sitekey = "6LeDAZ4UAAAAAMysqNfSY1ni1ryieo69x6nlacIM"
             render = "explicit"
             badge = "inline"
             className = "recaptcha"
+            theme = "dark"
             verifyCallback = {this.onRecaptchaResponse}
-          />
+            ref = {e=>this.RecaptchaInstance = e}
+        />
         <BottomNav>
           <span onClick = {this.publishPost}>
             <i
@@ -123,7 +88,7 @@ class Publish extends Component{
                 })()
               }>
             </i>
-              &ensp;Publish
+              &ensp; Publish
           </span>
           <span className = "fas fa-redo" onClick = {this.redo}>&ensp; Redo</span>
         </BottomNav>
