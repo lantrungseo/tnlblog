@@ -26,22 +26,16 @@ export const checkAdmin = async(userID)=>{
   return userAdminSnapshot.val()
 }
 
-export const savePost = async(title, contents, imgsNum, endpoint = "queue")=>{
+export const savePost = async(title, contents, imageTitles, endpoint = "queue")=>{
   let newPostRef = db.ref(`posts/${endpoint}`).push();
   //push images first with fake urls
-  let imageFakeURLs = [];
   let newImagesRef = newPostRef.child("images");
-  for(let cnt = 1; cnt <= imgsNum; ++cnt){
-    imageFakeURLs = [...imageFakeURLs, "haha"];
-  }
   let [imageIDs, setImageErr] = await wrapPromise(
     Promise.all(
-      imageFakeURLs.map(async(url)=>{
+      imageTitles.map(async(title)=>{
         let imageRef= newImagesRef.push()
         let [, setImageFakeErr] = await wrapPromise(
-          imageRef.set({
-            "url" : url
-          })
+          imageRef.set({url : "haha", title})
         )
         if(setImageFakeErr){
           throw new Error(setImageFakeErr);
@@ -56,7 +50,7 @@ export const savePost = async(title, contents, imgsNum, endpoint = "queue")=>{
   }
   //set contents and title
   let newPostContentRef = newPostRef.child("contents");
-  let [res, setPostErr] =  await wrapPromise(
+  let [, setPostErr] =  await wrapPromise(
     Promise.all([
       ...contents.map(async(content)=>{
         for(let contentKey in content){
@@ -105,7 +99,7 @@ export const uploadImage = async (file, id)=>{
       }
     })
     blobStream.on('error', (error)=>{
-      reject("could not upload the image");
+      reject(error);
     })
     blobStream.on("finish", async ()=>{
       const url = `https://storage.googleapis.com/${storage.name}/${fileUpload.name}`

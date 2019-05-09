@@ -43,11 +43,14 @@ const sendPostToServer = async ({imgs, title, contents, recaptchaToken}, isInQue
     throw new Error("Please do captcha");
   }
   let data = new FormData();
+  let imageTitles = [];
   data.append('title', title);
   data.append('contents', JSON.stringify(contents));
-  imgs.forEach((img)=>{
-    data.append('images', img.file)
+  imgs.forEach(({file, title: imgTitle})=>{
+    data.append('images', file);
+    imageTitles.push(imgTitle);
   })
+  data.append('imageTitles', JSON.stringify(imageTitles));
   let accessToken = sessionStorage.getItem('user_accessToken');
   let accountType = sessionStorage.getItem('user_accountType')
   return request.post("/posts/publish", data, {

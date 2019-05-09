@@ -33,7 +33,8 @@ const publishPost = async ({
 }, {
   title,
   contents,
-  images
+  images,
+  imageTitles
 }) => {
   //verify user and captcha
   let [, verifyError] = await (0, _utilities.wrapPromise)(Promise.all([(0, _user.verifyUserToken)(accountType, accessToken), (0, _user.verifyCaptcha)(recaptchaToken)]));
@@ -48,7 +49,7 @@ const publishPost = async ({
   let [{
     imageIDs,
     key: postKey
-  }, contentSaveErr] = await (0, _utilities.wrapPromise)((0, _db.savePost)(title, contents, images.length, endpoint));
+  }, contentSaveErr] = await (0, _utilities.wrapPromise)((0, _db.savePost)(title, contents, imageTitles, endpoint));
 
   if (contentSaveErr) {
     console.log(contentSaveErr);

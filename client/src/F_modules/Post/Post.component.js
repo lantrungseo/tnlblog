@@ -46,7 +46,10 @@ class Post extends Component{
                   {
                     (
                       imageIndex ?
-                      <img src = {images[imageIndex].url} className = "post-content-image"/>
+                      <div className = "post-content-image">
+                        <img src = {images[imageIndex].url} />
+                        <div className = "post-content-image-overlay">{images[imageIndex].title}</div>
+                      </div>
                       : null
                     )
                   }

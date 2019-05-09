@@ -36,7 +36,12 @@ export default class extends Component{
                 return null;
               }
               return(
-                <img key = {index} src = {images[key].url}/>
+                <div className = "post-carousel-image" key = {key}>
+                  <img src = {images[key].url}/>
+                  <div className = "post-carousel-image-overlay">
+                    {images[key].title}
+                  </div>
+                </div>
               )
             })
           }

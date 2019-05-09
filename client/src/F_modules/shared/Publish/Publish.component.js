@@ -23,6 +23,11 @@ const initialState = {
 
 const maxImgCount = 10;
 
+/*
+* content {imageIndex, content} 
+* imgs {localUrl, file, title}
+*/
+
 class Publish extends Component{
   constructor(props){
     super(props);
@@ -73,6 +78,7 @@ class Publish extends Component{
                           image = {imgs[chunk.imageIndex]} 
                           num = {chunk.imageIndex}
                           eraseImage = {this.eraseImage}
+                          addImageTitle = {this.addImageTitle}
                         />
                         <div 
                           contentEditable = {true} className = "textarea"
@@ -135,7 +141,6 @@ class Publish extends Component{
         })
         return newState
       }
-      
     )
   }
   //recaptcha response
@@ -182,7 +187,8 @@ class Publish extends Component{
                 ...prevState,
                 [key] : [...prevState[key], {
                   localUrl : localUrl,
-                  file : data.files[0]
+                  file : data.files[0],
+                  title : `Pic#${prevState[key].length}`
                 }]
               })
             )
@@ -214,6 +220,19 @@ class Publish extends Component{
         return;
       }
     }
+  }
+  //add image subtitle
+  addImageTitle = (index, value)=>{
+    this.setState(
+      (prevState)=>{
+        let newState = {...prevState};
+        newState['imgs'][index] = {
+          ...newState['imgs'][index],
+          title : `Pic#${index+1}: ${value}`
+        }
+        return newState;
+      }
+    )
   }
   //erase image
   eraseImage = (index)=>{

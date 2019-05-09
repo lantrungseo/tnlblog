@@ -25,14 +25,17 @@ var _default = app => {
   .post("/posts/publish", _middlewares.fileHandler.array("images", 10), async (req, res) => {
     let {
       contents,
-      title
+      title,
+      imageTitles
     } = req.body;
     let images = req.files;
     contents = JSON.parse(contents);
+    imageTitles = JSON.parse(imageTitles);
     let [resp, err] = await (0, _utilities.wrapPromise)((0, _post.publishPost)(req.query, {
       title,
       contents,
-      images
+      images,
+      imageTitles
     }));
 
     if (err) {

@@ -42,21 +42,16 @@ const checkAdmin = async userID => {
 
 exports.checkAdmin = checkAdmin;
 
-const savePost = async (title, contents, imgsNum, endpoint = "queue") => {
+const savePost = async (title, contents, imageTitles, endpoint = "queue") => {
   let newPostRef = _firebase.database.ref(`posts/${endpoint}`).push(); //push images first with fake urls
 
 
-  let imageFakeURLs = [];
   let newImagesRef = newPostRef.child("images");
-
-  for (let cnt = 1; cnt <= imgsNum; ++cnt) {
-    imageFakeURLs = [...imageFakeURLs, "haha"];
-  }
-
-  let [imageIDs, setImageErr] = await (0, _utilities.wrapPromise)(Promise.all(imageFakeURLs.map(async url => {
+  let [imageIDs, setImageErr] = await (0, _utilities.wrapPromise)(Promise.all(imageTitles.map(async title => {
     let imageRef = newImagesRef.push();
     let [, setImageFakeErr] = await (0, _utilities.wrapPromise)(imageRef.set({
-      "url": url
+      url: "haha",
+      title
     }));
 
     if (setImageFakeErr) {
@@ -73,7 +68,7 @@ const savePost = async (title, contents, imgsNum, endpoint = "queue") => {
 
 
   let newPostContentRef = newPostRef.child("contents");
-  let [res, setPostErr] = await (0, _utilities.wrapPromise)(Promise.all([...contents.map(async content => {
+  let [, setPostErr] = await (0, _utilities.wrapPromise)(Promise.all([...contents.map(async content => {
     for (let contentKey in content) {
       if (contentKey === "imageIndex") {
         if (content[contentKey] === -1) {
@@ -126,7 +121,7 @@ const uploadImage = async (file, id) => {
       }
     });
     blobStream.on('error', error => {
-      reject("could not upload the image");
+      reject(error);
     });
     blobStream.on("finish", async () => {
       const url = `https://storage.googleapis.com/${_firebase.storage.name}/${fileUpload.name}`;

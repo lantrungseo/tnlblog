@@ -13,14 +13,15 @@ export default (app)=>{
     })
     //publish post
     .post("/posts/publish", fileHandler.array("images", 10), async (req, res)=>{
-      let {contents, title} = req.body;
+      let {contents, title, imageTitles} = req.body;
       let images = req.files;
       contents = JSON.parse(contents);
+      imageTitles = JSON.parse(imageTitles);
       let [resp, err]= await wrapPromise(
         publishPost(
           req.query,
           {
-            title, contents, images
+            title, contents, images, imageTitles
           }
         )
       )

@@ -28,16 +28,26 @@
   left: 0;
   top: 0;
 }
-.image-list .image-display .overlay span.fa-times{
+.image-list .image-display .overlay span{
   width: 20%;
   height: 20%;
   color : rgb(255, 255, 255);
   position: absolute;
-  right: 0;
-  top: 0;
   cursor: pointer;
   z-index: 1;
 }
+.image-list .image-display .overlay span.fa-times{
+  right: 0;
+  top: 0;
+}
 .image-list .image-display .overlay span.fa-times:hover{
+  color: rgb(230, 221, 240);
+}
+
+.image-list .image-display .overlay span.fa-heading{
+  bottom: 25%;
+  left: 15%;
+}
+.image-list .image-display .overlay span.fa-heading:hover{
   color: rgb(230, 221, 240);
 }
