@@ -41,27 +41,29 @@ class Post extends Component{
         }
         <div className = "post-content">
           <h1>{title}</h1>
-          {Object.keys(contents).map(
-            (contentKey)=>{
-              let data = contents[contentKey];
-              let {imageIndex, content} = data;
-              return(
-                <Fragment key = {contentKey}>
-                  {
-                    (
-                      imageIndex ?
-                      <div className = "post-content-image">
-                        <img src = {images[imageIndex].url} />
-                        <div className = "post-content-image-overlay">{images[imageIndex].title}</div>
-                      </div>
-                      : null
-                    )
-                  }
-                  <div>{ReactHTMLParser(content)}</div>
-                </Fragment>
-              )
-            }
-          )}
+          {
+            Object.keys(contents).map(
+              (contentKey)=>{
+                let data = contents[contentKey];
+                let {imageIndex, content} = data;
+                return(
+                  <Fragment key = {contentKey}>
+                    {
+                      (
+                        imageIndex ?
+                        <div className = "post-content-image">
+                          <img src = {images[imageIndex].url} />
+                          <div className = "post-content-image-overlay">{images[imageIndex].title}</div>
+                        </div>
+                        : null
+                      )
+                    }
+                    <div>{ReactHTMLParser(content)}</div>
+                  </Fragment>
+                )
+              }
+            )
+          }
         </div>
       </div>
     )

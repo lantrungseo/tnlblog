@@ -60,6 +60,8 @@ class Publish extends Component{
           saveData = {this.saveData}
           contents = {this.state.contents}
           imgs = {this.state.imgs}
+          eraseImage = {this.eraseImage}
+          addImageTitle = {this.addImageTitle}
         />
         <Functionalities
           saveData = {this.saveData}
@@ -193,7 +195,7 @@ class Publish extends Component{
         let newState = {...prevState};
         newState['imgs'][index] = {
           ...newState['imgs'][index],
-          title : `Pic#${index+1}: ${value}`
+          title : value
         }
         return newState;
       }

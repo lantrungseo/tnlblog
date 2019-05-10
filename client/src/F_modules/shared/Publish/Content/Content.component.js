@@ -6,7 +6,7 @@ import Media from '../Media/Media.component'
 
 export default class extends Component{
   render(){
-    let {imgs, contents, saveData} = this.props;
+    let {imgs, contents, saveData, addImageTitle, eraseImage} = this.props;
     return(
       <div className = "publish-content"> 
         <input 
@@ -31,8 +31,8 @@ export default class extends Component{
                     <Media 
                       image = {imgs[chunk.imageIndex]} 
                       num = {chunk.imageIndex}
-                      eraseImage = {this.eraseImage}
-                      addImageTitle = {this.addImageTitle}
+                      eraseImage = {eraseImage}
+                      addImageTitle = {addImageTitle}
                     />
                     <div 
                       contentEditable = {true} className = "textarea"
