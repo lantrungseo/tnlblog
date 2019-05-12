@@ -1,5 +1,5 @@
 .rich-text-control-bar{
-  width: 86%;
+  width: 90%;
   margin: 20px auto;
   position: sticky;
   position: -webkit-sticky; /*for safari*/
@@ -7,7 +7,7 @@
   background: white;
 }
 .rich-text-control-bar button{
-  margin: 0 20px;
+  margin: 0 5px;
   border: none;
   background: transparent;
   cursor: pointer;

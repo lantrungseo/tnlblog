@@ -8,9 +8,7 @@ export default class extends Component{
     return(
       <Fragment>
         <div className="header">
-          <a href="#">Soccer</a>
-          <a href="#">School</a>
-          <a href="#">Readers' opinions</a>
+          <a href="#">Lưu bút</a>
           <span className="line"></span>
         </div>
         <div className = "mobile-subnav">
@@ -19,8 +17,8 @@ export default class extends Component{
             Author
           </a>
           <hr/>
-          <a className = "mobile-nav__link" href = "/admin">
-            Admin
+          <a className = "mobile-nav__link" href = "/">
+            Home
           </a>
           <hr/>
         </div>

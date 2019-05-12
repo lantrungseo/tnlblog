@@ -20,28 +20,28 @@ export default class NavBar extends Component{
         <div className = "nav">
           <div className = "nav__link">
             <a href = "https://lantrungsir.github.io">Author</a>
-            <a href = "/admin">Admin</a>
+            <a href = "/">Home</a>
           </div>
           <div className = "search-container">
-            <SearchBox/>
+            
           </div>
           <Auth/>
           <div className = "nav-content">
-              <h2 className = "logo">BLOG SO FUN</h2>
+              <h2 className = "logo">WHAT A BLOG</h2>
               <SubNav/>
           </div>
         </div>
 
         <div className = "mobile-nav">
           <a className = "logo">
-              BLOG SO FUN
+              WHAT A BLOG
           </a>
           <a className = {`mobile-nav__icon--open ${(this.state.isMobileMenuOpen ? "fas fa-times" : "fas fa-bars")}`}
             onClick = {e=>this.openMobileMenu()}
           ></a>
           <div className = {`mobile-nav__content ${(this.state.isMobileMenuOpen ? "css-slide-down" : "css-slide-up")}`}>
               <div className = "search-container">
-                <SearchBox/>
+                
               </div>
               <Auth/>
               <SubNav/>

@@ -8,7 +8,8 @@ const richTextButtons = [
   {command : "underline", icon : "underline"},
   {command : "justifyLeft", icon : "align-left"},
   {command: "justifyRight", icon : "align-right"},
-  {command: "justifyCenter", icon : "align-center"}
+  {command: "justifyCenter", icon : "align-center"},
+  {command : "justifyFull", icon : "align-justify"}
 ]
 
 export default class extends Component{
