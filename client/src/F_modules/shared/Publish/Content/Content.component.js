@@ -3,6 +3,7 @@ import React, {Component, Fragment} from 'react'
 import './style.css'
 //components
 import Media from '../Media/Media.component'
+import RichTextBar from './RichTextBar/RichTextBar.component'
 
 export default class extends Component{
   render(){
@@ -13,6 +14,7 @@ export default class extends Component{
           placeholder = "....post title here" type = "text"
           onChange = {e=>saveData('title', e.target.value)}
         />
+        <RichTextBar/>
         <div className = "publish-text">
           <div 
             contentEditable = {true} className = "textarea"
