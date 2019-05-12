@@ -39,8 +39,8 @@ class Post extends Component{
           </div>
           : null
         }
+        <h1>{title}</h1>
         <div className = "post-content">
-          <h1>{title}</h1>
           {
             Object.keys(contents).map(
               (contentKey)=>{
