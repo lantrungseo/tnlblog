@@ -19,7 +19,7 @@ export default class extends Component{
               thumbnailURL = story.images[Object.keys(story.images)[0]].url;
             }
             return(
-                <a className = "archive-story card-effect" key = {key} href = {`tnlautograph/${key}`}>
+                <a className = "archive-story card-effect" key = {key} href = {`/posts/${key}`}>
                   <img src = {thumbnailURL}/>
                   <h4>
                     {story.title}

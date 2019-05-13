@@ -8,17 +8,17 @@ export default class extends Component{
     return(
       <Fragment>
         <div className="header">
-          <a href="#">Lưu bút</a>
+          <a href="#">Overall</a>
           <span className="line"></span>
         </div>
         <div className = "mobile-subnav">
           <h2>Menu</h2>
           <a className = "mobile-nav__link" href = "https://lantrungsir.github.io">
-            Tác giả
+            Author
           </a>
           <hr/>
-          <a className = "mobile-nav__link" href = "/tnlautograph/write">
-            Viết cho Trung
+          <a className = "mobile-nav__link" href = "/">
+            Home
           </a>
           <hr/>
         </div>

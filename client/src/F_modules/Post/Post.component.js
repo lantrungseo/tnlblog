@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react'
 //styles
 import './style.css'
 //components
+import {Link} from 'react-router-dom'
 import Carousel from './Carousel/Carousel.component'
 import ReactHTMLParser from 'react-html-parser'
 //redux
@@ -23,12 +24,12 @@ class Post extends Component{
     return(
       <div className = "post-container">
         <div className = "post-header">
-          <a href = "/tnlautograph">
+          <Link to = "/">
             <span className = "fas fa-chevron-left">
             &ensp;
               MAIN PAGE
             </span>
-          </a>
+          </Link>
         </div>
         {
           images ?

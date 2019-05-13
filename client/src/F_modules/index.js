@@ -7,10 +7,6 @@ import Admin from './Admin/Admin.component'
 import Home from './Home/Home.component'
 import AuthRedirect from './AuthRedirect/AuthRedirect.component'
 import Post from './Post/Post.component'
-import NotFound from './NotFound/NotFound.component'
-
-//custom components
-import Custom from './Custom/Custom.component'
 //redux
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'
@@ -29,15 +25,13 @@ class App extends Component {
       <Router>
         <Switch>
           <PrivateRoute exact path = "/admin" component = {Admin}/>
-          <PrivateRoute exact path = "/tnlautograph/write" component = {Custom}/>
           <Route exact path = "/auth/redirect" component = {AuthRedirect}/>
-          <Route exact path = "/" component = {NotFound}/>
-          <Route exact path = "/tnlautograph/:id" render = {
+          <Route exact path = "/posts/:id" render = {
             ({match})=>(
               <Post endpoint = "verified" postID = {match.params.id}/>
             )
           }/>
-          <Route exact path = "/tnlautograph" component = {Home}/>
+          <Route exact path = "/" component = {Home}/>
         </Switch>
       </Router>
     );
