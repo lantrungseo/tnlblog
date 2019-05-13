@@ -2,7 +2,6 @@ import React, {Component, Fragment} from 'react'
 //styles
 import './style.css'
 //components
-import {Link} from 'react-router-dom'
 import Carousel from './Carousel/Carousel.component'
 import ReactHTMLParser from 'react-html-parser'
 //redux
@@ -12,8 +11,8 @@ import {getPosts} from '../../B_modules/Post/Post.action'
 
 class Post extends Component{
   componentDidMount(){
-    let {postID, getPost}  = this.props;
-    getPost(postID);
+    let {postID, getPost, endpoint}  = this.props;
+    getPost(endpoint, postID);
   }
   render(){
     let {post} = this.props;
@@ -24,13 +23,12 @@ class Post extends Component{
     return(
       <div className = "post-container">
         <div className = "post-header">
-          <Link to = "/">
+          <a href = "/tnlautograph">
             <span className = "fas fa-chevron-left">
             &ensp;
               MAIN PAGE
             </span>
-            
-          </Link>
+          </a>
         </div>
         {
           images ?

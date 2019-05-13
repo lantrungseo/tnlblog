@@ -225,8 +225,8 @@ class Publish extends Component{
   }
   //publish post
   publishPost = ()=>{
-    let {isInQueue} = this.props;
-    this.props.publish(this.state, isInQueue);
+    let {endpoint} = this.props;
+    this.props.publish(this.state, endpoint);
   }
   
 }

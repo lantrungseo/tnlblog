@@ -1,0 +1,13 @@
+.not-found-container{
+  width: 100%;
+  text-align: center;
+}
+.not-found-container #title {
+  font-size:80px;
+}
+.not-found-container #other { 
+  font-size:30px;
+}
+.not-found-container #other a{
+  text-decoration: underline;
+}

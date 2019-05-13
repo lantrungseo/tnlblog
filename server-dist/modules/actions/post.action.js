@@ -29,7 +29,7 @@ const publishPost = async ({
   accountType,
   accessToken,
   recaptchaToken,
-  isInQueue
+  endpoint
 }, {
   title,
   contents,
@@ -45,7 +45,6 @@ const publishPost = async ({
   } //save the main content (text content). Retrieve distinct IDs for images
 
 
-  let endpoint = isInQueue ? "queue" : "verified";
   let [{
     imageIDs,
     key: postKey

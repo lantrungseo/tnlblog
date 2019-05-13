@@ -19,8 +19,8 @@ export default class NavBar extends Component{
       <div className = "navbar-container card-effect">
         <div className = "nav">
           <div className = "nav__link">
-            <a href = "https://lantrungsir.github.io">Author</a>
-            <a href = "/">Home</a>
+            <a href = "https://lantrungsir.github.io">Tác giả</a>
+            <a href = "/tnlautograph/write">Viết cho Trung</a>
           </div>
           <div className = "search-container">
             

@@ -30,10 +30,10 @@ export default class extends Component{
           loaderTimeout: true
         })
       )
-    }, 1000)
+    }, 1500)
   }
   render(){
-    let {isAuthed, fbLogin, redditLogin} = this.props
+    let {isAuthed, fbLogin, redditLogin, redirectToLocation} = this.props
     let {loaderTimeout, show} = this.state;
     if(show){
       return(
@@ -68,9 +68,9 @@ export default class extends Component{
                 else{
                   return(
                     <Fragment>
-                      <a href = "/admin">
+                      <a href = {`${(redirectToLocation ? redirectToLocation : "/tnlautograph")}`}>
                         <img src = {sessionStorage.getItem('user_picture')}/>
-                        <p> Admin {sessionStorage.getItem('user_name')}</p> 
+                        <p> {sessionStorage.getItem('user_name')}</p> 
                       </a>
                     </Fragment>
                   )

@@ -11,7 +11,7 @@ export default class extends Component{
     let dataKeys = keysArr.slice(1,4);
     return (
       <div className = "newest-container card-effect">
-        <a className = "top-story-container card-effect" href = {`post/${keysArr[0]}`}>
+        <a className = "top-story-container card-effect" href = {`tnlautograph/${keysArr[0]}`}>
           {
             (()=>{
               let topStory = posts[keysArr[0]];
@@ -37,7 +37,7 @@ export default class extends Component{
                 thumbnailURL = hotStory.images[Object.keys(hotStory.images)[0]].url;
               }
               return(
-                  <a className = "hot-story card-effect" key ={key} href = {`post/${key}`}>
+                  <a className = "hot-story card-effect" key ={key} href = {`tnlautograph/${key}`}>
                     <img src = {thumbnailURL}/>
                     <h4>
                       {hotStory.title}

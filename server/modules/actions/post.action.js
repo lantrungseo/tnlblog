@@ -13,7 +13,7 @@ export const getPosts = async (isVerified, id = "")=>{
 }
 
 export const publishPost = async(
-  {accountType, accessToken, recaptchaToken, isInQueue}, 
+  {accountType, accessToken, recaptchaToken, endpoint}, 
   {title, contents, images, imageTitles}
 )=>{
   //verify user and captcha
@@ -28,7 +28,6 @@ export const publishPost = async(
     throw new Error(verifyError);
   }
   //save the main content (text content). Retrieve distinct IDs for images
-  let endpoint = (isInQueue ? "queue" : "verified");
 
   let [{imageIDs, key: postKey}, contentSaveErr] = await wrapPromise(
     savePost(title, contents, imageTitles, endpoint)

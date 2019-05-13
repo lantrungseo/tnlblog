@@ -32,7 +32,7 @@ export const publish = (data)=>{
 }
 
 //helpers
-const sendPostToServer = async ({imgs, title, contents, recaptchaToken}, isInQueue)=>{
+const sendPostToServer = async ({imgs, title, contents, recaptchaToken}, endpoint)=>{
   if(!title){
     throw new Error("You must enter title");
   }
@@ -58,7 +58,7 @@ const sendPostToServer = async ({imgs, title, contents, recaptchaToken}, isInQue
       accessToken : accessToken,
       recaptchaToken : recaptchaToken,
       accountType : accountType,
-      isInQueue : isInQueue
+      endpoint : endpoint
     }
   })
 }

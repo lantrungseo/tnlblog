@@ -14,8 +14,7 @@ const defaultThumbnailURL = "https://i0.wp.com/www.tryoopedia.com/wp-content/upl
 
 class BlogPosts extends Component{
   componentDidMount(){
-    this.props.getPosts();
-    
+    this.props.getPosts("verified");
   }
   render(){
     let {posts} = this.props;

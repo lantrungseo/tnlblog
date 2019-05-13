@@ -48,11 +48,11 @@ class PrivateRoute extends Component {
       return(
         <Redirect
           to = {{
-            pathname : "/",
+            pathname : "/tnlautograph",
             state: {
               from : location
             },
-            search : "?auth_open_dialog=true"
+            search : `?auth_open_dialog=true&redirect_to=${location.pathname}`
           }}
         />
       )

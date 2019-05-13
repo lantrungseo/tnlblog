@@ -11,7 +11,7 @@ class PostManage extends Component{
   render(){
     return (
       <div className = "post-manage-container" id = "post">
-        <Publish isInQueue = {false}/>
+        <Publish endpoint = "verified"/>
       </div>
     )
   }

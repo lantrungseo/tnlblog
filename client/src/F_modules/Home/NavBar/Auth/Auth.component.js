@@ -14,7 +14,8 @@ class Auth extends Component{
   constructor(props){
     super(props);
     this.state= {
-      authDialogOpen : false
+      authDialogOpen : false,
+      redirectToLocation : undefined
     }
   }
 
@@ -22,10 +23,12 @@ class Auth extends Component{
     //for admin auth fallback
     let urlParamsFinder = new URLSearchParams(window.location.search);
     let authDialogOpen = urlParamsFinder.get("auth_open_dialog");
+    let redirectToLocation = urlParamsFinder.get("redirect_to");
     this.setState(
       (prevState)=>({
         ...prevState,
-        authDialogOpen : authDialogOpen
+        authDialogOpen : authDialogOpen,
+        redirectToLocation : redirectToLocation
       })
     )
   }
@@ -57,6 +60,7 @@ class Auth extends Component{
           fbLogin = {fbLogin}
           redditLogin = {redditLogin}
           isAuthed ={isAuthed}
+          redirectToLocation = {this.state.redirectToLocation}
         />
       </Fragment>
       

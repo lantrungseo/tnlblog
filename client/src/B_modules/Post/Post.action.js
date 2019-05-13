@@ -20,10 +20,10 @@ const gettingPosts = ()=>({
 })
 
 //impure actions
-export const getPosts = (id = "")=>{
+export const getPosts = (endpoint, id = "")=>{
   return async (dispatch)=>{
     dispatch(gettingPosts());
-    let [res, err] = await wrapPromise(getPostData(id));
+    let [res, err] = await wrapPromise(getPostData(endpoint, id));
     if(err){
       dispatch(failGetPosts());
       return;
@@ -34,8 +34,8 @@ export const getPosts = (id = "")=>{
 }
 
 //helpers
-const getPostData = async (id = "")=>{
-  return request.get("/posts/verified", {
+const getPostData = async (endpoint, id = "")=>{
+  return request.get(`posts/${endpoint}`, {
     params:{
       id : id
     }

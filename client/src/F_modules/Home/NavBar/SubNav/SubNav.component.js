@@ -14,11 +14,11 @@ export default class extends Component{
         <div className = "mobile-subnav">
           <h2>Menu</h2>
           <a className = "mobile-nav__link" href = "https://lantrungsir.github.io">
-            Author
+            Tác giả
           </a>
           <hr/>
-          <a className = "mobile-nav__link" href = "/">
-            Home
+          <a className = "mobile-nav__link" href = "/tnlautograph/write">
+            Viết cho Trung
           </a>
           <hr/>
         </div>
