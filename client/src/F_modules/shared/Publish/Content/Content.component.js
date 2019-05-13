@@ -19,7 +19,7 @@ export default class extends Component{
           <div 
             contentEditable = {true} className = "textarea"
             placeholder = "....content here"
-            onBlur = {e=>this.refineContent(0, e.target.innerHTML)}
+            onBlur = {e=>this.refineContent(0, e)}
           >
           </div>
           {
@@ -39,7 +39,7 @@ export default class extends Component{
                     <div 
                       contentEditable = {true} className = "textarea"
                       placeholder = "....continue to write here"
-                      onBlur = {e=>this.refineContent(index, e.target.innerHTML)}
+                      onBlur = {e=>this.refineContent(index, e)}
                     >
                     </div>
                   </Fragment>
@@ -51,8 +51,9 @@ export default class extends Component{
       </div>
     )
   }
-  refineContent=(index, inputText)=>{
+  refineContent=(index, e)=>{
     let {saveData} = this.props;
+    let inputText=  e.target.innerHTML;
     let replacedText, replacePattern1, replacePattern2, replacePattern3;
 
     //URLs starting with http://, https://, or ftp://
@@ -73,5 +74,9 @@ export default class extends Component{
       `<a style='text-decoration:underline;' href='mailto:$1'>$1</a>`
     );
     saveData('contents', replacedText, index);
+    let pureText = e.target.innerText || e.target.textContent;
+    if(!pureText.trim().length){
+      e.target.innerHTML = null;
+    }
   }
 }
