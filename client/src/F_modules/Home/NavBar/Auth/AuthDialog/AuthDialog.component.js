@@ -30,7 +30,7 @@ export default class extends Component{
           loaderTimeout: true
         })
       )
-    }, 1500)
+    }, 1000)
   }
   render(){
     let {isAuthed, fbLogin, redditLogin, redirectToLocation} = this.props
@@ -52,12 +52,12 @@ export default class extends Component{
                 if(!isAuthed){
                   return (
                     <Fragment>
-                      <button className = "fb css-ripple" onClick = {e=>fbLogin()}>
+                      <button className = "fb css-ripple" onClick = {()=>fbLogin()}>
                         <span className = "fab fa-facebook-f"></span>
                         &ensp;
                         <span>with Facebook</span>
                       </button>
-                      <button className = "reddit css-ripple" onClick = {e=>redditLogin()}>
+                      <button className = "reddit css-ripple" onClick = {()=>redditLogin()}>
                         <span className = "fab fa-reddit"></span>
                         &ensp;
                         <span>with Reddit</span>
