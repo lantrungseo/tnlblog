@@ -59,7 +59,7 @@ class Auth extends Component{
           show = {this.state.authDialogOpen}
           fbLogin = {fbLogin}
           redditLogin = {redditLogin}
-          isAuthed ={isAuthed}
+          isAuthed = {isAuthed}
           redirectToLocation = {this.state.redirectToLocation}
         />
       </Fragment>

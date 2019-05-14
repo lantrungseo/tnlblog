@@ -35,6 +35,7 @@ export default class extends Component{
   render(){
     let {isAuthed, fbLogin, redditLogin, redirectToLocation} = this.props
     let {loaderTimeout, show} = this.state;
+    console.log(isAuthed);
     if(show){
       return(
         <div className = "modal-overlay">
@@ -68,7 +69,7 @@ export default class extends Component{
                 else{
                   return(
                     <Fragment>
-                      <a href = {`${(redirectToLocation ? redirectToLocation : "/tnlautograph")}`}>
+                      <a href = {`${(redirectToLocation ? redirectToLocation : "/")}`}>
                         <img src = {sessionStorage.getItem('user_picture')}/>
                         <p> {sessionStorage.getItem('user_name')}</p> 
                       </a>
