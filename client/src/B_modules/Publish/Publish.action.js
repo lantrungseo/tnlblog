@@ -18,10 +18,10 @@ const publishFail = ()=>({
 })
 
   //non-pure
-export const publish = (data)=>{
+export const publish = (data, endpoint)=>{
   return async (dispatch)=>{
     dispatch(publishStart());
-    let [, err] = await wrapPromise(sendPostToServer(data));
+    let [, err] = await wrapPromise(sendPostToServer(data, endpoint));
     if(err){
       alert(err);
       dispatch(publishFail());
