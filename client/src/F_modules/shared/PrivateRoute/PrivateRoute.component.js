@@ -48,7 +48,7 @@ class PrivateRoute extends Component {
       return(
         <Redirect
           to = {{
-            pathname : "/tnlautograph",
+            pathname : "/",
             state: {
               from : location
             },
