@@ -138,6 +138,13 @@ const saveDataLocal = (data)=>{
 const continueWithFacebook = ()=>{
   return new Promise((resolve, reject)=>{
     let {FB} = window;
+    FB.getLoginStatus((response)=>{
+      let {status, authResponse: res} = response;
+      if(status !== "connected"){
+        reject(new Error("User do not like my app huhu :("));
+      } 
+      resolve(res);
+    })
     FB.login((response)=>{
       let {status, authResponse: res} = response;
       if(status !== "connected"){
@@ -147,6 +154,7 @@ const continueWithFacebook = ()=>{
     })
   })
 }
+
 
 //reddit login flow
 const continueWithReddit = ()=>{

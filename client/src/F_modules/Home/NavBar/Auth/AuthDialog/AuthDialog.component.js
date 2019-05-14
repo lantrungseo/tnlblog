@@ -30,12 +30,11 @@ export default class extends Component{
           loaderTimeout: true
         })
       )
-    }, 1000)
+    }, 500)
   }
   render(){
     let {isAuthed, fbLogin, redditLogin, redirectToLocation} = this.props
     let {loaderTimeout, show} = this.state;
-    console.log(isAuthed);
     if(show){
       return(
         <div className = "modal-overlay">
@@ -53,7 +52,9 @@ export default class extends Component{
                 if(!isAuthed){
                   return (
                     <Fragment>
-                      <button className = "fb css-ripple" onClick = {()=>fbLogin()}>
+                      <button className = "fb css-ripple" 
+                        onClick = {()=>{console.log("hello");fbLogin();}}
+                      >
                         <span className = "fab fa-facebook-f"></span>
                         &ensp;
                         <span>with Facebook</span>
