@@ -103,9 +103,9 @@ export const redditLogin = ()=>{
 const checkUserTokenLocal = async (accountType, isDataSave)=>{
   //retrieve previous saved access token. If null => throw
   let accessToken = sessionStorage.getItem(`user_accessToken`)
-
+  let userAccountType = sessionStorage.getItem('user_accountType');
   //post to server for token verification and saving
-  if(!accessToken){
+  if(!accessToken || (userAccountType !== accountType)){
     throw new Error(`${accountType} Access Token disappeared`)
   } 
   let [result, error] = await wrapPromise(verifyToken(accountType, accessToken, isDataSave))
