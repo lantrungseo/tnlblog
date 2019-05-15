@@ -20,7 +20,7 @@ class Post extends Component{
     if(!post){
       return null;
     }
-    let {contents, images, title} = post;
+    let {contents, images, title, author} = post;
     return(
       <div className = "post-container">
         <div className = "post-header">
@@ -40,6 +40,10 @@ class Post extends Component{
         }
         <h1>{title}</h1>
         <div className = "post-content">
+          <div className = "post-author">
+            <img src = {author['user_picture']}/>
+            <p className = "author-name">{author['user_name']}</p>
+          </div>
           {
             Object.keys(contents).map(
               (contentKey)=>{
