@@ -9,11 +9,23 @@ import Loader from '../Loader/Loader.component'
 
 class PrivateRoute extends Component {
   componentDidMount(){
-    window.addEventListener("FBReady", this.checkLoginStatus)
+    if(this.props.isFbSdkReady){
+      this.props.checkLoginStatus();
+      return;
+    }
+    window.addEventListener("FBReady", this.props.fbSdkReady);
   }
 
   componentWillUnmount(){
-    window.removeEventListener("FBReady", this.checkLoginStatus)
+    window.removeEventListener("FBReady", this.props.fbSdkReady)
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps !== this.props){
+      if(nextProps.isFbSdkReady){
+        this.props.checkLoginStatus();
+      }
+    }
   }
 
   render(){
@@ -49,15 +61,11 @@ class PrivateRoute extends Component {
       )
     }
   }
-  //custom methods
-  checkLoginStatus = ()=>{
-    this.props.fbSdkReady();
-    this.props.checkLoginStatus();
-  }
 }
 
 const mapStateToProps = (state)=>({
-  isAuthed : state.AuthReducer.isAuthed
+  isAuthed : state.AuthReducer.isAuthed,
+  isFbSdkReady: state.AuthReducer.isFbSdkReady
 })
 
 const mapDispatchToProps = (dispatch)=>({

@@ -14,10 +14,23 @@ import {fbSdkReady, checkLoginStatus} from '../B_modules/Auth/Auth.action'
 
 class App extends Component {
   componentDidMount(){
-    window.addEventListener("FBReady", this.checkLoginStatus)
+    if(this.props.isFbSdkReady){
+      this.props.checkLoginStatus();
+      return;
+    }
+    window.addEventListener("FBReady", this.props.fbSdkReady);
   }
+
   componentWillUnmount(){
-    window.removeEventListener("FBReady", this.checkLoginStatus)
+    window.removeEventListener("FBReady", this.props.fbSdkReady)
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps !== this.props){
+      if(nextProps.isFbSdkReady){
+        this.props.checkLoginStatus();
+      }
+    }
   }
   render(){
     return (
@@ -35,14 +48,12 @@ class App extends Component {
       </Router>
     );
   }
-  //custom methods
-  checkLoginStatus = ()=>{
-    this.props.fbSdkReady();
-    this.props.checkLoginStatus();
-  }
 }
 
-const mapStateToProps = ()=>({});
+const mapStateToProps = (state)=>({
+  isFbSdkReady: state.AuthReducer.isFbSdkReady
+})
+
 const mapDispatchToProps = (dispatch)=>({
   fbSdkReady : bindActionCreators(fbSdkReady, dispatch),
   checkLoginStatus : bindActionCreators(checkLoginStatus, dispatch)
