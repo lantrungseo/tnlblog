@@ -17,10 +17,9 @@ const getPosts = async (isVerified, id = "") => {
 
   if (err) {
     throw new Error("could not access the posts data");
-  } //data now is a db snapshot, so call data.val() to get value
+  }
 
-
-  return data.val();
+  return data;
 };
 
 exports.getPosts = getPosts;
@@ -37,7 +36,7 @@ const publishPost = async ({
   imageTitles
 }) => {
   //verify user and captcha
-  let [, verifyError] = await (0, _utilities.wrapPromise)(Promise.all([(0, _user.verifyUserToken)(accountType, accessToken), (0, _user.verifyCaptcha)(recaptchaToken)]));
+  let [[userResult], verifyError] = await (0, _utilities.wrapPromise)(Promise.all([(0, _user.verifyUserToken)(accountType, accessToken), (0, _user.verifyCaptcha)(recaptchaToken)]));
 
   if (verifyError) {
     console.log(verifyError);
@@ -45,10 +44,14 @@ const publishPost = async ({
   } //save the main content (text content). Retrieve distinct IDs for images
 
 
+  let author = {
+    accountType: accountType,
+    id: userResult['user_id']
+  };
   let [{
     imageIDs,
     key: postKey
-  }, contentSaveErr] = await (0, _utilities.wrapPromise)((0, _db.savePost)(title, contents, imageTitles, endpoint));
+  }, contentSaveErr] = await (0, _utilities.wrapPromise)((0, _db.savePost)(title, contents, imageTitles, endpoint, author));
 
   if (contentSaveErr) {
     console.log(contentSaveErr);

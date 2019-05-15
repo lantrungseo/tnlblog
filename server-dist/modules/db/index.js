@@ -9,6 +9,9 @@ var _firebase = require("../../config/firebase");
 
 var _utilities = require("../utilities");
 
+/*rules, all get function must return an pure, immutable object type data */
+
+/*user */
 const saveUser = async (accountType, userData) => {
   try {
     let {
@@ -30,6 +33,18 @@ const saveUser = async (accountType, userData) => {
 
 exports.saveUser = saveUser;
 
+const getUserData = async (accountType, userID) => {
+  let [userData, userErr] = await (0, _utilities.wrapPromise)(_firebase.database.ref(`users/${accountType}/${userID}`).once("value"));
+
+  if (userErr) {
+    throw new Error(userErr);
+  }
+
+  return userData.val();
+};
+/**admin */
+
+
 const checkAdmin = async userID => {
   let [userAdminSnapshot, err] = await (0, _utilities.wrapPromise)(_firebase.database.ref(`admins/${userID}`).once('value'));
 
@@ -39,10 +54,12 @@ const checkAdmin = async userID => {
 
   return userAdminSnapshot.val();
 };
+/*post */
+
 
 exports.checkAdmin = checkAdmin;
 
-const savePost = async (title, contents, imageTitles, endpoint = "queue") => {
+const savePost = async (title, contents, imageTitles, endpoint = "queue", author) => {
   let newPostRef = _firebase.database.ref(`posts/${endpoint}`).push(); //push images first with fake urls
 
 
@@ -90,7 +107,10 @@ const savePost = async (title, contents, imageTitles, endpoint = "queue") => {
     }
 
     return "ok";
-  }), newPostRef.child("title").set(title)]));
+  }), newPostRef.update({
+    title,
+    author
+  })]));
 
   if (setPostErr) {
     console.log(setPostErr);
@@ -148,13 +168,37 @@ const saveImageToPost = async (imageKeys, imageURLs, endpoint, key) => {
       url
     });
   }));
-};
+}; //if pagination added : just choose the limit number larger than number of children of a post
+
 
 exports.saveImageToPost = saveImageToPost;
 
 const getPostData = async (endpoint, id = "") => {
-  return _firebase.database.ref(`posts/${endpoint}/${id}`).once("value"); //if pagination added : just choose the limit number larger than number of children of a post
-}; //helpers
+  let [postData, error] = await (0, _utilities.wrapPromise)(_firebase.database.ref(`posts/${endpoint}/${id}`).once("value"));
+
+  if (error) {
+    throw new Error(error);
+  }
+
+  postData = postData.val();
+
+  if (id && id.length) {
+    let {
+      accountType,
+      id
+    } = postData['author'];
+    let [authorData, getAuthorErr] = await (0, _utilities.wrapPromise)(getUserData(accountType, id));
+
+    if (getAuthorErr) {
+      throw new Error(getAuthorErr);
+    }
+
+    postData['author'] = authorData;
+  }
+
+  return postData;
+};
+/*helpers */
 
 
 exports.getPostData = getPostData;

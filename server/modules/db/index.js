@@ -1,6 +1,9 @@
 import {database as db, storage} from '../../config/firebase'
 import {wrapPromise} from '../utilities'
 
+/*rules, all get function must return an pure, immutable object type data */
+
+/*user */
 export const saveUser = async (accountType, userData)=>{
   try{
     let {user_id} = userData
@@ -18,6 +21,17 @@ export const saveUser = async (accountType, userData)=>{
   }
 }
 
+const getUserData = async(accountType, userID)=>{
+  let [userData, userErr] = await wrapPromise(
+    db.ref(`users/${accountType}/${userID}`).once("value")
+  )
+  if(userErr){
+    throw new Error(userErr);
+  }
+  return userData.val()
+}
+
+/**admin */
 export const checkAdmin = async(userID)=>{
   let [userAdminSnapshot, err] = await wrapPromise(db.ref(`admins/${userID}`).once('value'));
   if(err){
@@ -26,7 +40,8 @@ export const checkAdmin = async(userID)=>{
   return userAdminSnapshot.val()
 }
 
-export const savePost = async(title, contents, imageTitles, endpoint = "queue")=>{
+/*post */
+export const savePost = async(title, contents, imageTitles, endpoint = "queue", author)=>{
   let newPostRef = db.ref(`posts/${endpoint}`).push();
   //push images first with fake urls
   let newImagesRef = newPostRef.child("images");
@@ -76,7 +91,7 @@ export const savePost = async(title, contents, imageTitles, endpoint = "queue")=
         }
         return "ok";
       }),
-      newPostRef.child("title").set(title)
+      newPostRef.update({title, author})
     ])
   )
   if(setPostErr){
@@ -113,7 +128,6 @@ export const uploadImage = async (file, id)=>{
   })
 }
 
-
 export const saveImageToPost = async (imageKeys, imageURLs, endpoint, key)=>{
   let postImageRef = db.ref(`posts/${endpoint}/${key}/images`);
   return Promise.all(
@@ -126,12 +140,29 @@ export const saveImageToPost = async (imageKeys, imageURLs, endpoint, key)=>{
   )
 }
 
+//if pagination added : just choose the limit number larger than number of children of a post
 export const getPostData = async (endpoint, id = "")=>{
-  return db.ref(`posts/${endpoint}/${id}`).once("value");
-  //if pagination added : just choose the limit number larger than number of children of a post
+  let [postData, error] = await wrapPromise(
+    db.ref(`posts/${endpoint}/${id}`).once("value")
+  );
+  if(error){
+    throw new Error(error);
+  }
+  postData = postData.val();
+  if(id && id.length){
+    let {accountType, id} = postData['author'];
+    let [authorData, getAuthorErr] = await wrapPromise(
+      getUserData(accountType, id)
+    );
+    if(getAuthorErr){
+      throw new Error(getAuthorErr);
+    }
+    postData['author'] = authorData;
+  }
+  return postData
 }
 
-//helpers
+/*helpers */
 const getFileExtenstion = (filename)=>{
   return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
 }
