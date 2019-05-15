@@ -16,3 +16,12 @@ export const wrapPromise = (promise)=>{
     .then(data=> ([data, null]))
     .catch(err=> ([null, err]))
 }
+
+export const asyncOperate =  async (...promises)=>{
+  let results = [];
+  promises.forEach((promise)=>{
+    let promiseRet = await wrapPromise(promise);
+    results.push(promiseRet);
+  })
+  return results;
+}

@@ -1,4 +1,4 @@
-import {AxiosInstance as request, wrapPromise} from '../utilities'
+import {AxiosInstance as request, wrapPromise, asyncOperate} from '../utilities'
 import Reddit from '../reddit'
 
 export const IS_AUTHED = 'LOGGED IN'
@@ -11,19 +11,14 @@ const userAuthed = ()=>({
   type : IS_AUTHED,
 })
 
-const userUnAuthed = (accountType)=>{  
-  if(sessionStorage.getItem(`user_${accountType}AccessToken`)){
-    Object.keys(sessionStorage).forEach(key=>{
-      if(key.substr(0,4) === 'user'){
-        sessionStorage.removeItem(key)
-      }
-    })
-    return {
-      type : IS_UNAUTHED
+const userUnAuthed = ()=>{  
+  Object.keys(sessionStorage).forEach(key=>{
+    if(key.substr(0, 4) === "user"){
+      sessionStorage.removeItem(key);
     }
-  }
-  else{
-    return {type: ""}
+  })
+  return {
+    type : IS_UNAUTHED
   }
 }
 
@@ -32,15 +27,20 @@ export const fbSdkReady = ()=>({
 })
 
   //non-pure actions
-export const checkLoginStatus = (accountType)=>{
+export const checkLoginStatus = ()=>{
   return async (dispatch)=>{
-    let [, err] = await wrapPromise(checkUserTokenLocal(accountType, true));
-    if(err){
-      dispatch(userUnAuthed(accountType));
-      return;
+    let results = await asyncOperate(
+      checkUserTokenLocal('fb'),
+      checkUserTokenLocal('reddit')
+    ) 
+    let isAuthed = true;
+    results.forEach(([result, err])=>{
+      isAuthed &= (!err && result);
+    });
+    if(isAuthed){
+      dispatch(userAuthed());
+      dispatch(userUnAuthed())
     }
-    dispatch(userAuthed());
-    return;
   }
 }
 
@@ -49,13 +49,13 @@ export const fbLogin = ()=>{
     let {AuthReducer} = getState()
     let {isFbSdkReady} = AuthReducer
     if(!isFbSdkReady){
-      dispatch(userUnAuthed('fb'));
+      dispatch(userUnAuthed());
       return;
     }
     //login with facebook
     let [response, err] = await wrapPromise(continueWithFacebook());
     if(err){
-      dispatch(userUnAuthed('fb'));
+      dispatch(userUnAuthed());
       return;
     }
     //retrieve access token, check and save info
@@ -66,7 +66,7 @@ export const fbLogin = ()=>{
     });
     let [, checkTokenErr] = await wrapPromise(checkUserTokenLocal('fb', true));
     if(checkTokenErr){
-      dispatch(userUnAuthed('fb'))
+      dispatch(userUnAuthed())
       return;
     }
     dispatch(userAuthed())
@@ -77,7 +77,7 @@ export const redditLogin = ()=>{
   return async(dispatch)=>{
     let [accessToken, error] = await wrapPromise(continueWithReddit())
     if(error){
-      dispatch(userAuthed('reddit'));
+      dispatch(userAuthed());
       return;
     }
     saveDataLocal({
@@ -86,7 +86,7 @@ export const redditLogin = ()=>{
     })
     let [, err] = await wrapPromise(checkUserTokenLocal('reddit', true))
     if(err){
-      dispatch(userUnAuthed('reddit'))
+      dispatch(userUnAuthed())
       return;
     }
     dispatch(userAuthed())

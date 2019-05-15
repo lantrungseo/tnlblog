@@ -15,7 +15,6 @@ import {fbSdkReady, checkLoginStatus} from '../B_modules/Auth/Auth.action'
 class App extends Component {
   componentDidMount(){
     window.addEventListener("FBReady", this.checkLoginStatus)
-    this.props.checkLoginStatus("reddit")
   }
   componentWillUnmount(){
     window.removeEventListener("FBReady", this.checkLoginStatus)
@@ -39,7 +38,7 @@ class App extends Component {
   //custom methods
   checkLoginStatus = ()=>{
     this.props.fbSdkReady();
-    this.props.checkLoginStatus("fb")
+    this.props.checkLoginStatus()
   }
 }
 
