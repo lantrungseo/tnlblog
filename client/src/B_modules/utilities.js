@@ -20,7 +20,7 @@ export const wrapPromise = (promise)=>{
 export const asyncOperate =  async (...promises)=>{
   let results = [];
   for(let promise of promises){
-    let promiseRet = await wrapPromise(promise);
+    let promiseRet = await promise;
     results.push(promiseRet);
   }
   return results;

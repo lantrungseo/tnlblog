@@ -30,8 +30,8 @@ export const fbSdkReady = ()=>({
 export const checkLoginStatus = ()=>{
   return async (dispatch)=>{
     let results = await asyncOperate(
-      checkUserTokenLocal('fb'),
-      checkUserTokenLocal('reddit')
+      wrapPromise(checkUserTokenLocal('fb', true)),
+      wrapPromise(checkUserTokenLocal('reddit', true))
     ) 
     let isAuthed = false;
     results.forEach(
@@ -106,7 +106,7 @@ const checkUserTokenLocal = async (accountType, isDataSave)=>{
   let userAccountType = sessionStorage.getItem('user_accountType');
   //post to server for token verification and saving
   if(!accessToken || (userAccountType !== accountType)){
-    throw new Error(`${accountType} Access Token disappeared`)
+    throw new Error(`${accountType} Access Token disappeared`);
   } 
   let [result, error] = await wrapPromise(verifyToken(accountType, accessToken, isDataSave))
   if(error){
