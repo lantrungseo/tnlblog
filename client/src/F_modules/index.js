@@ -38,7 +38,7 @@ class App extends Component {
   //custom methods
   checkLoginStatus = ()=>{
     this.props.fbSdkReady();
-    this.props.checkLoginStatus()
+    this.props.checkLoginStatus();
   }
 }
 

@@ -19,9 +19,9 @@ export const wrapPromise = (promise)=>{
 
 export const asyncOperate =  async (...promises)=>{
   let results = [];
-  promises.forEach((promise)=>{
+  for(let promise of promises){
     let promiseRet = await wrapPromise(promise);
     results.push(promiseRet);
-  })
+  }
   return results;
 }

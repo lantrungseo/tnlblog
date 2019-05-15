@@ -33,14 +33,18 @@ export const checkLoginStatus = ()=>{
       checkUserTokenLocal('fb'),
       checkUserTokenLocal('reddit')
     ) 
-    let isAuthed = true;
-    results.forEach(([result, err])=>{
-      isAuthed &= (!err && result);
-    });
+    let isAuthed = false;
+    results.forEach(
+      ([result, err])=>{
+        if(!err && result) isAuthed |= true;
+        else isAuthed |= false;
+      }
+    );
     if(isAuthed){
       dispatch(userAuthed());
-      dispatch(userUnAuthed())
+      return;
     }
+    dispatch(userUnAuthed())
   }
 }
 

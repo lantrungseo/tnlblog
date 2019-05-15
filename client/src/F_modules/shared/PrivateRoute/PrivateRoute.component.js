@@ -1,30 +1,21 @@
 import React, {Component} from 'react'
 //redux
 import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {fbSdkReady, checkLoginStatus} from '../../../B_modules/Auth/Auth.action'
 //components
 import {Route, Redirect} from 'react-router-dom'
 import Loader from '../Loader/Loader.component'
 
 class PrivateRoute extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      authCheckTimeOut: false
-    }
-  }
   componentDidMount(){
-    this.timer = setTimeout(()=>{
-      this.setState(
-        prevState =>({
-          ...prevState,
-          authCheckTimeOut : true
-        })
-      )
-    }, 1500)
+    window.addEventListener("FBReady", this.checkLoginStatus)
   }
+
   componentWillUnmount(){
-    clearTimeout(this.timer);
+    window.removeEventListener("FBReady", this.checkLoginStatus)
   }
+
   render(){
     let {component, ...rest} = this.props;
     return (
@@ -35,14 +26,9 @@ class PrivateRoute extends Component {
     )
   }
   routeRender = (componentProps)=>{
-    let {component: Component, isAuthed, location} = this.props
+    let {component: Component, isAuthed, location} = this.props;
     if(isAuthed === undefined){
-      if(this.state.authCheckTimeOut){
-        isAuthed = false;
-      }
-      else{
-        return <Loader/>
-      }
+      return <Loader/>
     }
     if(isAuthed === false){
       return(
@@ -63,12 +49,20 @@ class PrivateRoute extends Component {
       )
     }
   }
+  //custom methods
+  checkLoginStatus = ()=>{
+    this.props.fbSdkReady();
+    this.props.checkLoginStatus();
+  }
 }
 
 const mapStateToProps = (state)=>({
   isAuthed : state.AuthReducer.isAuthed
 })
 
-const mapDispatchToProps = ()=>({})
+const mapDispatchToProps = (dispatch)=>({
+  fbSdkReady : bindActionCreators(fbSdkReady, dispatch),
+  checkLoginStatus : bindActionCreators(checkLoginStatus, dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute)
