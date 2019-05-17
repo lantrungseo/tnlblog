@@ -110,7 +110,7 @@ export const uploadImage = async (file, id)=>{
     let fileUpload = storage.file(newName);
     let blobStream = fileUpload.createWriteStream({
       metadata : {
-        contentType : file.mimeType
+        contentType : file.mimetype
       }
     })
     blobStream.on('error', (error)=>{

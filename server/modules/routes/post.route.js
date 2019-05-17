@@ -1,6 +1,6 @@
 import {getPosts, publishPost} from '../actions/post.action'
 import {wrapPromise} from '../utilities'
-import {fileHandler} from '../../config/middlewares'
+import {fileHandler, imageResizer, imageResizer} from '../../config/middlewares'
 export default (app)=>{
   app
     //get posts data
@@ -12,7 +12,7 @@ export default (app)=>{
       res.status(200).send(data);
     })
     //publish post
-    .post("/posts/publish", fileHandler.array("images", 10), async (req, res)=>{
+    .post("/posts/publish", fileHandler.array("images", 10), imageResizer, async (req, res)=>{
       let {contents, title, imageTitles} = req.body;
       let images = req.files;
       contents = JSON.parse(contents);

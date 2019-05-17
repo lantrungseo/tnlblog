@@ -11,7 +11,7 @@ class PostManage extends Component{
   render(){
     return (
       <div className = "post-manage-container" id = "post">
-        <Publish endpoint = "verified"/>
+        <Publish endpoint = "test"/>
       </div>
     )
   }

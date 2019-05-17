@@ -22,7 +22,7 @@ var _default = app => {
 
     res.status(200).send(data);
   }) //publish post
-  .post("/posts/publish", _middlewares.fileHandler.array("images", 10), async (req, res) => {
+  .post("/posts/publish", _middlewares.fileHandler.array("images", 10), _middlewares.imageResizer, async (req, res) => {
     let {
       contents,
       title,

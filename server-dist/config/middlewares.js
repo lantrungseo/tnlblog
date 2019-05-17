@@ -3,13 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fileHandler = exports.default = void 0;
+exports.imageResizer = exports.fileHandler = exports.default = void 0;
 
 var bodyParser = _interopRequireWildcard(require("body-parser"));
 
 var _cors = _interopRequireDefault(require("cors"));
 
 var _multer = _interopRequireDefault(require("multer"));
+
+var _sharp = _interopRequireDefault(require("sharp"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34,8 +36,42 @@ var _default = (app, express) => {
       }
     }
   })); //static files (--serve for production)
-};
+}; //image handler
+
 
 exports.default = _default;
-const fileHandler = (0, _multer.default)(_multer.default.memoryStorage());
+const fileHandler = (0, _multer.default)(_multer.default.memoryStorage()); //image resize middleware
+
 exports.fileHandler = fileHandler;
+
+const imageResizer = (req, res, next) => {
+  if (!req.files || !req.files.length) {
+    next();
+  }
+
+  resizeImages(req.files).then(images => {
+    for (let i = 0; i < images.length; ++i) {
+      images[i] = {
+        buffer: images[i],
+        originalname: req.files[i].originalname,
+        mimetype: req.files[i].mimetype
+      };
+    }
+
+    req.files = images;
+    next();
+  }).catch(e => {
+    res.status(500).send(e);
+  });
+}; //helpers
+
+
+exports.imageResizer = imageResizer;
+
+const resizeImages = async images => {
+  return Promise.all(images.map(async image => {
+    return (0, _sharp.default)(image.buffer, {
+      enlarge: false
+    }).resize(50, 50).toBuffer();
+  }));
+};

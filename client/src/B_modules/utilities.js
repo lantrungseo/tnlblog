@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export const AxiosInstance = axios.create({
   baseURL : "http://localhost:2828",
-  timeout: 10000,
+  timeout: 30000,
   validateStatus : (status)=>{
     return status >= 200 && status < 300
   }

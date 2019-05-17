@@ -137,7 +137,7 @@ const uploadImage = async (file, id) => {
 
     let blobStream = fileUpload.createWriteStream({
       metadata: {
-        contentType: file.mimeType
+        contentType: file.mimetype
       }
     });
     blobStream.on('error', error => {
