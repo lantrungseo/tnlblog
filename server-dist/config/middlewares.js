@@ -61,6 +61,7 @@ const imageResizer = (req, res, next) => {
     req.files = images;
     next();
   }).catch(e => {
+    console.log(e);
     res.status(500).send(e);
   });
 }; //helpers
@@ -72,6 +73,6 @@ const resizeImages = async images => {
   return Promise.all(images.map(async image => {
     return (0, _sharp.default)(image.buffer, {
       enlarge: false
-    }).resize(50, 50).toBuffer();
+    }).resize(1024, 1024).toBuffer();
   }));
 };

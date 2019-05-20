@@ -46,6 +46,7 @@ export const imageResizer = (req, res, next)=>{
             }
         )
         .catch(e=>{
+            console.log(e);
             res.status(500).send(e);
         })
 }
@@ -57,7 +58,7 @@ const resizeImages = async (images)=>{
             return sharp(image.buffer, {
                     enlarge: false
                 })
-                .resize(50, 50)
+                .resize(1024, 1024)
                 .toBuffer()
         })
     )

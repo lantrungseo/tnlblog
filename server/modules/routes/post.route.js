@@ -1,6 +1,6 @@
 import {getPosts, publishPost} from '../actions/post.action'
 import {wrapPromise} from '../utilities'
-import {fileHandler, imageResizer, imageResizer} from '../../config/middlewares'
+import {fileHandler, imageResizer} from '../../config/middlewares'
 export default (app)=>{
   app
     //get posts data
