@@ -21,6 +21,7 @@ class Post extends Component{
       return null;
     }
     let {contents, images, title, author} = post;
+    console.log(author);
     return(
       <div className = "post-container">
         <div className = "post-header">
