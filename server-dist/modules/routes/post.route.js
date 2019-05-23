@@ -18,6 +18,7 @@ var _default = app => {
 
     if (err) {
       res.status(403).send(err);
+      return;
     }
 
     res.status(200).send(data);

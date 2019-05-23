@@ -11,8 +11,7 @@ export default (app)=>{
           verifyUserToken(accountType, accessToken, isDataSave)
         )
         if(err){
-          res.status(403).send("forbidden");
-          return;
+          return res.status(403).send("forbidden");
         }
         res.status(200).send(result)
     })

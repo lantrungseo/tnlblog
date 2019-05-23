@@ -8,6 +8,7 @@ export default (app)=>{
       let [data, err] = await wrapPromise(getPosts(true, req.query.id));
       if(err){
         res.status(403).send(err);
+        return;
       }
       res.status(200).send(data);
     })
@@ -26,9 +27,9 @@ export default (app)=>{
         )
       )
       if(err){
-        res.status(403).send(err)
+        res.status(403).send(err);
         return;
       }
-      res.status(200).send(resp)
+      res.status(200).send(resp);
     })
 }

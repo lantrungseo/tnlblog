@@ -20,8 +20,7 @@ var _default = app => {
     let [result, err] = await (0, _utilities.wrapPromise)((0, _user.verifyUserToken)(accountType, accessToken, isDataSave));
 
     if (err) {
-      res.status(403).send("forbidden");
-      return;
+      return res.status(403).send("forbidden");
     }
 
     res.status(200).send(result);

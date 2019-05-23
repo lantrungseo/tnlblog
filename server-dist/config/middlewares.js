@@ -47,6 +47,7 @@ exports.fileHandler = fileHandler;
 const imageResizer = (req, res, next) => {
   if (!req.files || !req.files.length) {
     next();
+    return;
   }
 
   resizeImages(req.files).then(images => {

@@ -30,6 +30,7 @@ export const fileHandler = multer(multer.memoryStorage());
 export const imageResizer = (req, res, next)=>{
     if(!req.files || !req.files.length){
         next();
+        return;
     }
     resizeImages(req.files)
         .then(
