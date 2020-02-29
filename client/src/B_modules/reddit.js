@@ -46,7 +46,7 @@ const getRedditAuthURL = ()=>{
   let state = generateState();
   let redditAuthURL =  `https://www.reddit.com/api/v1/authorize?`
   let params = {
-    client_id : "j6NLU1hHpv-NVw",
+    client_id : "",
     response_type : "token",
     redirect_uri : `${window.location.origin}/auth/redirect`,
     state : state,
